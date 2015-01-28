@@ -1,0 +1,34 @@
+<% if @user.errors.any? %>
+<div id="error_messages">
+  <h2>Fel i formuläret gjorde att användaren inte kunde sparas:</h2>
+  <ul>
+    <% @user.errors.full_messages.each do |msg| %>
+    <li><%= msg %></li>
+    <% end %>
+  </ul>
+</div>
+<% end %>
+
+<div id="register">
+  <h1>Skapa användarkonto</h1>
+  
+  <fieldset>
+  <%= form_for @user do |f| %>
+
+    <p><%= f.label :email %></p>
+    <p><%= f.email_field :email %></p>
+  
+    <p><%= f.label :password %></p>
+    <p><%= f.password_field :password %></p>
+    
+    <p><%= f.label :password_confirmation %></p>
+    <p><%= f.password_field :password_confirmation %></p>
+   
+    <p><%= f.label :app_url %></p>
+    <p><%= f.text_field :app_url %></p>
+
+    <p><%= f.submit "Skapa användarkonto" %></p>
+
+  <% end %>
+  </fieldset>
+</div>
