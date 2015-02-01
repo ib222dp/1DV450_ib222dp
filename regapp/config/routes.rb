@@ -9,9 +9,17 @@ Rails.application.routes.draw do
   resources :users
   
   get 'api_keys' => 'api_keys#show', as: :apikey
+  get 'admin_api_keys' => 'admin_api_keys#show', as: :adminapikey
+  get 'revoke' => 'admin_api_keys#revoke', as: :revoke
+  get 'revokekey' => 'admin_api_keys#revokekey', as: :revokekey
   
   post  'login'   => 'users#login',  as: :login
   get   'logout'  => 'users#logout', as: :logout
+  
+  get 'admin' => 'admins#index', as: :admin
+  post 'adminlogin' => 'admins#adminlogin', as: :adminlogin
+  get 'adminlogout' => 'admins#adminlogout', as: :adminlogout
+ 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 

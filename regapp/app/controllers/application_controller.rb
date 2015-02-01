@@ -9,10 +9,20 @@ class ApplicationController < ActionController::Base
     @current_user ||= User.find(session[:userid]) if session[:userid]
   end
   
-  def require_login
-    if current_user.nil? then
-      redirect_to root_path
-    end
+  def current_admin
+    @current_admin ||= Admin.find(session[:adminid]) if session[:adminid]
   end
   
+  def require_login
+    if current_user.nil? then
+    redirect_to root_path
+    end
+  end
+    
+  def require_adminlogin
+    if current_admin.nil? then
+    redirect_to admin_path
+    end
+  end
+
 end
