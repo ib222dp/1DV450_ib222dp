@@ -10,16 +10,17 @@ class AdminsController < ApplicationController
     a = Admin.find_by_username(params[:username])
     if a && a.authenticate(params[:password])
       session[:adminid] = a.id
-      redirect_to adminapikey_path
+      redirect_to adminapikeys_path
     else
-      flash[:notice] = "Inloggning misslyckades"
+      flash[:danger] = "Inloggning misslyckades"
       redirect_to admin_path
     end
   end
   
   def adminlogout
     session[:adminid] = nil
-    redirect_to admin_path, :notice => "Du har loggat ut"
+    flash[:info] = "Du har loggat ut"
+    redirect_to admin_path 
   end
   
 end

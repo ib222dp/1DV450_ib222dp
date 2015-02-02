@@ -1,35 +1,36 @@
-<% if @user.errors.any? %>
-<div id="error_messages">
-  <h2>Fel i formuläret gjorde att användaren inte kunde sparas:</h2>
-  <ul>
-    <% @user.errors.full_messages.each do |msg| %>
-    <li><%= msg %></li>
-    <% end %>
-  </ul>
-</div>
+<%if @user.errors.full_messages.any? %>
+  <div class="alert alert-danger">
+    <h2>Fel i formuläret gjorde att användaren inte kunde sparas:</h2>
+    <ul>
+      <% @user.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+    </ul>
+  </div>
 <% end %>
 
-<div id="register">
-  <h1>Skapa användarkonto</h1>
+<h1>Skapa användarkonto</h1>
   
-  <fieldset>
-  <%= form_for @user do |f| %>
-
-    <p><%= f.label :email %></p>
-    <p><%= f.email_field :email %></p>
-  
-    <p><%= f.label :password %></p>
-    <p><%= f.password_field :password %></p>
+<div class="row">
+  <div class="col-md-6">
+    <%= form_for @user do |f| %>
     
-    <p><%= f.label :password_confirmation %></p>
-    <p><%= f.password_field :password_confirmation %></p>
+    <%= f.label :email, 'Epost' %>
+    <%= f.email_field :email, class: 'form-control' %>
+  
+    <%= f.label :password, 'Lösenord' %>
+    <%= f.password_field :password, class: 'form-control' %>
+    
+    <%= f.label :password_confirmation, 'Bekräfta lösenord' %>
+    <%= f.password_field :password_confirmation, class: 'form-control' %>
    
-    <p><%= f.label :app_url %></p>
-    <p><%= f.text_field :app_url %></p>
-
-    <p><%= f.submit "Skapa användarkonto" %></p>
-
-  <% end %>
-  </fieldset>
-  <%= link_to "Logga in - Användare", root_path %><br />
+    <%= f.label :app_url, 'URL till din applikation' %>
+    <%= f.text_field :app_url, class: 'form-control' %>
+    <br />
+    <%= f.submit "Skapa användarkonto", class: "btn btn-primary" %>
+    <% end %>
+    <br />
+  </div>
 </div>
+
+<p> <%= link_to "Logga in - Användare", root_path %></p>

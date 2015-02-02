@@ -13,7 +13,7 @@ class UsersController < ApplicationController
     
     if @user.save
       session[:userid] = @user.id
-      redirect_to apikey_path
+      redirect_to userapikey_path
     else
       render :action => "new"
     end
@@ -22,19 +22,20 @@ class UsersController < ApplicationController
    ## In- och utloggning
   
   def login
-    u = User.find_by_email(params[:email])
+    u = User.find_by(email: params[:email].downcase)
     if u && u.authenticate(params[:password])
       session[:userid] = u.id
-      redirect_to apikey_path
+      redirect_to userapikey_path
     else
-      flash[:notice] = "Inloggning misslyckades"
+      flash[:danger] = "Inloggning misslyckades"
       redirect_to root_path
     end
   end
   
   def logout
     session[:userid] = nil
-    redirect_to root_path, :notice => "Du har loggat ut"
+    flash[:info] = "Du har loggat ut"
+    redirect_to root_path 
   end
   
   private

@@ -8,17 +8,21 @@ Rails.application.routes.draw do
   
   resources :users
   
-  get 'api_keys' => 'api_keys#show', as: :apikey
-  get 'admin_api_keys' => 'admin_api_keys#show', as: :adminapikey
-  get 'revoke' => 'admin_api_keys#revoke', as: :revoke
-  get 'revokekey' => 'admin_api_keys#revokekey', as: :revokekey
+  get 'user_api_key' => 'api_keys#show', as: :userapikey
+  get 'admin_api_keys' => 'admin_api_keys#show', as: :adminapikeys
   
-  post  'login'   => 'users#login',  as: :login
-  get   'logout'  => 'users#logout', as: :logout
+  post 'user_delete_key' => 'api_keys#deletekey', as: :userdeletekey
+  get 'user_revoke_key' => 'api_keys#revokekey', as: :userrevokekey
+  
+  post 'admin_delete_key' => 'admin_api_keys#deletekey', as: :admindeletekey
+  get 'admin_revoke_key' => 'admin_api_keys#revokekey', as: :adminrevokekey
+  
+  post  'user_login'   => 'users#login',  as: :userlogin
+  get   'user_logout'  => 'users#logout', as: :userlogout
   
   get 'admin' => 'admins#index', as: :admin
-  post 'adminlogin' => 'admins#adminlogin', as: :adminlogin
-  get 'adminlogout' => 'admins#adminlogout', as: :adminlogout
+  post 'admin_login' => 'admins#adminlogin', as: :adminlogin
+  get 'admin_logout' => 'admins#adminlogout', as: :adminlogout
  
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

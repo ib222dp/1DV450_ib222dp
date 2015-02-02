@@ -1,0 +1,12 @@
+<h1>Ta bort API-nyckel</h1>
+
+<p><%= @key.api_key_value %></p>
+
+<fieldset>
+  <%= form_tag({ controller: "api_keys", action: "deletekey", apikeyid: "#{@key.id}" }) do %>
+  <p><%= submit_tag("Ta bort API-nyckel") %></p>
+<% end %>
+</fieldset>
+
+<p><%= link_to "Visa API-nyckel", userapikey_path %></p>
+<p><%= link_to "Logga ut", userlogout_path %></p>

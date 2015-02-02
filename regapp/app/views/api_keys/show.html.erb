@@ -1,6 +1,9 @@
-<h1>Din nyckel</h1>
+<h1>Din API-nyckel</h1>
 
-<p><%= @key.api_key_value %></p>
+<% if !@key.nil? %>
+  <p><%= link_to "#{@key.api_key_value}", { :controller => "api_keys", :action => "revokekey", :apikey => @key.id} %></p>
+<% else %>
+  <p>Din API-nyckel har tagits bort.</p>
+<% end %>
 
-
-<%= link_to "Logga ut", logout_path %>
+<p><%= link_to "Logga ut", userlogout_path %></p>
