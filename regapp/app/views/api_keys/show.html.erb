@@ -1,7 +1,5 @@
 <h1>Din API-nyckel</h1>
 
-<p><%= @key.api_key_value %></p>
-
 <% if !@key.nil? %>
   <p><%= link_to "#{@key.api_key_value}", { :controller => "api_keys", :action => "revokekey", :apikey => @key.id} %></p>
 <% else %>
