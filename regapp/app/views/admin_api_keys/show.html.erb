@@ -1,6 +1,6 @@
 <h1>Admin - API-nycklar</h1>
 
-<% if !@keys.nil? %>
+<% if !@keys.empty? %>
   <ul>
     <% @keys.each do |key| %>
       <li><%= link_to "#{key.api_key_value}", { :controller => "admin_api_keys", :action => "revokekey", :apikey => key.id}  %></li>

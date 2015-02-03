@@ -8,8 +8,8 @@ class ApiKey < ActiveRecord::Base
   
   private
   
+  #http://railscasts.com/episodes/352-securing-an-api?view=asciicast
   def generate_api_key_value
-    puts "test"
     begin
       self.api_key_value = SecureRandom.hex
     end while self.class.exists?(api_key_value: api_key_value)

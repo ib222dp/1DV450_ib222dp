@@ -6,7 +6,8 @@
 
 <h1>Logga in - Administratör</h1>
 
-<%= form_tag adminlogin_path, method: "post", :class=>"form-horizontal", :role=> "form" do %>
+<!--http://seanmcevoy.com/bootstrap-form_tag-vs-form_for/-->
+<%= form_tag adminlogin_path, method: "post", :class => "form-horizontal", :role => "form" do %>
   <div class="form-group">
     <%= label_tag :username, "Användarnamn", class: "col-sm-2 control-label" %>
     <div class="col-sm-4">

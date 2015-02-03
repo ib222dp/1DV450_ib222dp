@@ -9,7 +9,9 @@ class UsersController < ApplicationController
   end
   
   def create
-    @user = User.new(user_params) 
+    @user = User.new(user_params)
+    userKey = ApiKey.new
+    @user.api_key = userKey;
     
     if @user.save
       session[:userid] = @user.id
@@ -33,7 +35,8 @@ class UsersController < ApplicationController
   end
   
   def logout
-    session[:userid] = nil
+    session.delete(:userid)
+    @current_user = nil
     flash[:info] = "Du har loggat ut"
     redirect_to root_path 
   end

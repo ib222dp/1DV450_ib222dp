@@ -18,7 +18,8 @@ class AdminsController < ApplicationController
   end
   
   def adminlogout
-    session[:adminid] = nil
+    session.delete(:adminid)
+    @current_admin = nil
     flash[:info] = "Du har loggat ut"
     redirect_to admin_path 
   end

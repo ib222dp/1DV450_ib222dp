@@ -5,7 +5,8 @@
 <% end %>
 
 <h1>Logga in</h1>
-  
+
+<!--http://seanmcevoy.com/bootstrap-form_tag-vs-form_for/-->
 <%= form_tag userlogin_path, method: "post", :class=>"form-horizontal", :role=> "form" do %>
   <div class="form-group">
     <%= label_tag :email, "Epost", class: "col-sm-2 control-label" %>
