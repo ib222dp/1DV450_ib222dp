@@ -3,7 +3,8 @@ class ApiKeysController < ApplicationController
   before_action :require_login
   
   def show
-    @key = @current_user.api_key
+    @key = ApiKey.new;
+    @current_user.api_key = @key;
   end
   
   def revokekey
