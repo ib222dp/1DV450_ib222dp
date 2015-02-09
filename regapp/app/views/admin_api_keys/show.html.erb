@@ -10,4 +10,4 @@
   <p>Inga API-nycklar att visa.</p>
 <% end %>
 
-<p><%= link_to "Logga ut", adminlogout_path %></p>
+<p><%= link_to "Logga ut", adminlogout_path, data: {no_turbolink: true} %></p>
