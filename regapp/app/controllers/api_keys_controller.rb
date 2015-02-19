@@ -8,10 +8,21 @@ class ApiKeysController < ApplicationController
   
   def revokekey
     @key = ApiKey.find_by_id(params[:apikey])
+    unless @current_user.api_key == @key
+      flash[:danger] = "Du har inte åtkomst till denna sida"
+      redirect_to userapikey_path
+      return 
+    end
   end
   
   def deletekey
-    ApiKey.find_by_id(params[:apikeyid]).destroy
+    @key = ApiKey.find_by_id(params[:apikeyid])
+    unless @current_user.api_key == @key
+      flash[:danger] = "Du har inte åtkomst till denna sida"
+      redirect_to userapikey_path
+      return 
+    end
+   @key.destroy
   end
   
 end

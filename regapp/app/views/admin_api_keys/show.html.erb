@@ -1,3 +1,9 @@
+<% flash.each do|message_type, message| %>
+  <div class="alert alert-<%= message_type %>">
+    <%= message %>
+  </div>
+<% end %>
+
 <h1>Admin - API-nycklar</h1>
 
 <% if !@keys.empty? %>

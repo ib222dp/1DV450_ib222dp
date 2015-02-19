@@ -10,8 +10,10 @@ class UsersController < ApplicationController
   
   def create
     @user = User.new(user_params)
+    @admin = Admin.first
     userKey = ApiKey.new
     @user.api_key = userKey;
+    @admin.api_keys << userKey
     
     if @user.save
       session[:userid] = @user.id
