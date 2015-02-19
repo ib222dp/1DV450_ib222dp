@@ -1,5 +1,7 @@
 * Jag har inte publicerat applikationen, så det är nog enklast att klona repot från GitHub till Nitrous och testköra applikationen därifrån
 
+* Om du använder ett IDE i Windows (t.ex. RubyMine) så måste du lägga till 'tzinfo-data' i Gemfile och sedan köra bundle install innan du kör rake    db:migrate för att skapa databasen
+
 * Version Ruby: 2.1.1p76 (2014-02-24 revision 45161) [x86_64-linux]
 
 * Version Rails: 4.1.0
