@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  get 'attractions/new'
+  #get 'attractions/new'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
@@ -12,7 +12,9 @@ Rails.application.routes.draw do
   post '/auth' => 'sessions#api_auth'
   
   resources :attractions
-
+  
+  get '/logout'  => 'sessions#destroy'  
+  
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 

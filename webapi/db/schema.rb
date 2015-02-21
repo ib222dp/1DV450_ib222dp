@@ -11,20 +11,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150220155641) do
+ActiveRecord::Schema.define(version: 20150221155252) do
 
   create_table "attractions", force: :cascade do |t|
     t.string   "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.integer  "user_id"
+    t.integer  "position_id"
   end
 
-  create_table "creators", force: :cascade do |t|
-    t.string   "username"
-    t.string   "email"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
-    t.string   "password_digest"
+  add_index "attractions", ["position_id"], name: "index_attractions_on_position_id"
+  add_index "attractions", ["user_id"], name: "index_attractions_on_user_id"
+
+  create_table "attractions_tags", id: false, force: :cascade do |t|
+    t.integer "attraction_id"
+    t.integer "tag_id"
   end
 
   create_table "positions", force: :cascade do |t|
@@ -39,5 +41,16 @@ ActiveRecord::Schema.define(version: 20150220155641) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
+
+  create_table "users", force: :cascade do |t|
+    t.string   "username"
+    t.string   "email"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.string   "password_digest"
+  end
+
+  add_index "users", ["email"], name: "index_users_on_email", unique: true
+  add_index "users", ["username"], name: "index_users_on_username", unique: true
 
 end

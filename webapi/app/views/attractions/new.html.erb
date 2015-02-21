@@ -1,2 +1,20 @@
-<h1>Attractions#new</h1>
-<p>Find me in app/views/attractions/new.html.erb</p>
+<% if @attraction.errors.full_messages.any? %>
+  <% @attraction.errors.full_messages.each do |error_message| %>
+    <div class="alert alert-danger" role="alert">
+      <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+      <span class="sr-only">Error:</span>
+       <%= error_message  %> <br />
+    </div>
+ <% end %>
+<% end %>
+
+<%= form_for(@attraction) do |f| %>
+
+  <%= f.label :name %><br />
+  <%= f.text_field :name %> <br />
+
+  <%= f.label :position_id %><br />
+  <%= f.select :position_id, options_from_collection_for_select(Position.all, :id, :lat, :lng) %><br /><br />
+  
+  <%= f.submit "Skapa ny turistattraktion", class: "btn btn-primary" %>
+<% end %>

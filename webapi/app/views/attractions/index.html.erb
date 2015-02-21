@@ -1,0 +1,7 @@
+<h2>Alla turistattraktioner</h2>
+
+<ul>
+<% @attractions.each do |attraction| %>
+  <li><%= attraction.name %></li>
+<% end %>
+</ul>

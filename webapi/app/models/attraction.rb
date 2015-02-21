@@ -1,5 +1,11 @@
 class Attraction < ActiveRecord::Base
-  belongs_to :creator
+  include Rails.application.routes.url_helpers 
+  
+  belongs_to :user
+  belongs_to :position
+  has_and_belongs_to_many :tags
+  
+  validates :name, presence: true
   
   def serializable_hash (options={} )
     options = {
@@ -7,8 +13,10 @@ class Attraction < ActiveRecord::Base
       methods: [:self_link]
       }.update(options)
     super(options)
-    
-    def self_link
-      { :self => "#{Rails.configuration.baseurl}#{attraction_path(self)}" }
-    end
+  end
+  
+  def self_link
+    { :self => "#{Rails.configuration.baseurl}#{attraction_path(self)}" }
+  end
+
 end
