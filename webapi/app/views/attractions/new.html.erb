@@ -1,8 +1,6 @@
 <% if @attraction.errors.full_messages.any? %>
   <% @attraction.errors.full_messages.each do |error_message| %>
-    <div class="alert alert-danger" role="alert">
-      <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-      <span class="sr-only">Error:</span>
+    <div>
        <%= error_message  %> <br />
     </div>
  <% end %>

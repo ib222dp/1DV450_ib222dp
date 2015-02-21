@@ -39,5 +39,5 @@ Rails.application.configure do
   config.baseurl = "http://jolly-good-highgarden-94-186247.euw1.nitrousbox.com"
 
   # Raises error for missing translations
-  # config.action_view.raise_on_missing_translations = true
+  #config.action_view.raise_on_missing_translations = true
 end
