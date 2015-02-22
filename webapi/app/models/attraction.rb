@@ -6,6 +6,7 @@ class Attraction < ActiveRecord::Base
   has_and_belongs_to_many :tags
   
   validates :name, presence: true
+  validates :user_id, presence: true
   
   def serializable_hash (options={} )
     options = {
@@ -17,6 +18,14 @@ class Attraction < ActiveRecord::Base
   
   def self_link
     { :self => "#{Rails.configuration.baseurl}#{attraction_path(self)}" }
+  end
+
+  def to_param
+    "#{self.id+1234}"
+  end
+
+  def self.from_param(param)
+    find_by_id!(param.to_i-1234)
   end
 
 end

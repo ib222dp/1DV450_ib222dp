@@ -11,7 +11,10 @@ Rails.application.routes.draw do
   
   post '/auth' => 'sessions#api_auth'
   
-  resources :attractions
+  resources :users do
+    resources :attractions, only: [:index]
+  end
+  resources :attractions, only: [:new, :create, :index, :show]
   
   get '/logout'  => 'sessions#destroy'  
   

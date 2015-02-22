@@ -1,16 +1,32 @@
 class AttractionsController < ApplicationController
   
-  before_action :check_user, only: [:new, :create]
-  before_action :set_no_cache, only: [:new, :create]
   respond_to :json
   
-  rescue_from ActionController::UnknownFormat, with: :raise_bad_format
-  before_action :api_authenticate, only: [:index]
+  #before_action :api_authenticate, only: [:index, :show]
+  before_action :check_user, only: [:new, :create]
+  before_action :set_no_cache, only: [:new, :create]
   
-  #Visar samtliga turistattraktioner sorterade enligt senaste datum
+  rescue_from ActionController::UnknownFormat, with: :raise_bad_format
+  
+  #Visar samtliga turistattraktioner sorterade enligt senaste datum, eller samtliga turistattraktioner skapade av en viss användare
   def index
-    @attractions = Attraction.all(:order => "created_at DESC")
+    if params[:user_id].present?
+      @user = User.find(params[:user_id])
+      @attractions = @user.attractions
+    else
+      @attractions = Attraction.all.order("created_at DESC")
+    end
     respond_with @attractions
+  end
+  
+  #Visar en enskild turistattraktion
+  def show
+    @attraction = Attraction.from_param(params[:id])
+    respond_with @attraction
+    
+  rescue ActiveRecord::RecordNotFound
+    @error = ErrorMessage.new("Resursen hittades ej")
+    respond_with @error, status: :not_found
   end
   
   #Skapar ny turistattraktion
@@ -19,29 +35,20 @@ class AttractionsController < ApplicationController
   end
   
   def create
+    @user = User.find(session[:user_id])
     @attraction = Attraction.new(attraction_params)
     
     if @attraction.save
-      redirect_to attractions_path
+      redirect_to user_attractions_path(@attraction.user_id)
     else
       render 'new'
     end
   end
   
-  #Visar en enskild turistattraktion
-  def show
-    @attraction = Attraction.find(params[:id])
-    respond_with @attraction
-    
-  rescue ActiveRecord::RecordNotFound
-    @error = ErrorMessage.new("Resursen hittades ej")
-    respond_with @error, status: :not_found
-  end
-  
   private
   
   def attraction_params
-    params.require(:attraction).permit(:name, :position_id) 
+    params.require(:attraction).permit(:name, :position_id, :user_id, { :value => @user.id} ) 
   end
   
   def raise_bad_format

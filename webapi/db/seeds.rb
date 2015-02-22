@@ -8,7 +8,7 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
 User.delete_all
-u1 = User.create(:username => "User1", :email => "email@email.com", :password => "123", :password_confirmation => "123")
+u1 = User.create(:username => "User1", :email => "email@email.com", :password => "123", :password_confirmation => "123", :apikey => "ec5e58d004bcbde0b409bd90593cc28f")
 
 Attraction.delete_all
 a1 = Attraction.create(:name => "Attraction1")
