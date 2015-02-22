@@ -11,29 +11,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150222133318) do
+ActiveRecord::Schema.define(version: 20150222200024) do
 
   create_table "attractions", force: :cascade do |t|
-    t.string   "name"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.string   "address"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.integer  "user_id"
-    t.integer  "position_id"
+    t.float    "latitude"
+    t.float    "longitude"
   end
 
-  add_index "attractions", ["position_id"], name: "index_attractions_on_position_id"
   add_index "attractions", ["user_id"], name: "index_attractions_on_user_id"
 
   create_table "attractions_tags", id: false, force: :cascade do |t|
     t.integer "attraction_id"
     t.integer "tag_id"
-  end
-
-  create_table "positions", force: :cascade do |t|
-    t.datetime "created_at",                          null: false
-    t.datetime "updated_at",                          null: false
-    t.decimal  "lat",        precision: 10, scale: 6
-    t.decimal  "lng",        precision: 10, scale: 6
   end
 
   create_table "tags", force: :cascade do |t|

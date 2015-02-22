@@ -18,8 +18,8 @@ class SessionsController < ApplicationController
   end
   
   def destroy
-    logout
-    flash[:info] = "Du har loggat ut"
+    user = User.find_by(session[:user_id])
+    logout user
     redirect_to root_url
   end
   

@@ -8,11 +8,10 @@
 
 <%= form_for(@attraction) do |f| %>
 
-  <%= f.label :name %><br />
-  <%= f.text_field :name %> <br />
-
-  <%= f.label :position_id %><br />
-  <%= f.select :position_id, options_from_collection_for_select(Position.all, :id, :lat, :lng) %><br /><br />
+  <%= f.label :address %><br />
+  <%= f.text_field :address %> <br />
   
   <%= f.submit "Skapa ny turistattraktion", class: "btn btn-primary" %>
 <% end %>
+
+<p><%= link_to "Logga ut", logout_path, data: {no_turbolink: true} %></p>

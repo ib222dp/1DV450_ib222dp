@@ -1,16 +1,19 @@
 class Attraction < ActiveRecord::Base
+  
+  geocoded_by :address
+  after_validation :geocode, :if => :address_changed?
+  
   include Rails.application.routes.url_helpers 
   
   belongs_to :user
-  belongs_to :position
   has_and_belongs_to_many :tags
   
-  validates :name, presence: true
-  validates :user_id, presence: true
+  validates :address, presence: true
+  #validates :user_id, presence: true
   
   def serializable_hash (options={} )
     options = {
-      only: [:name],
+      only: [:address, :latitude, :longitude],
       methods: [:self_link]
       }.update(options)
     super(options)
