@@ -1,19 +1,13 @@
 class SessionsController < ApplicationController
   protect_from_forgery :except => [:api_auth]
   
-  def new
-    
-  end
-  
   def create
-    user = User.find_by(email: params[:session][:email].downcase)
-    
-    if user && user.authenticate(params[:session][:password])
+    user = User.find_by(email: params[:email].downcase)
+    if user && user.authenticate(params[:password])
       login user
-      redirect_to new_attraction_path
+      respond_with user, status: :ok
     else
-      flash.now[:danger] = "Ogiltigt användarnamn eller lösenord"
-      render 'new'
+      render json: { error: 'Ogiltigt användarnamn eller lösenord' }, status: :unauthorized
     end
   end
   

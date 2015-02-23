@@ -1,22 +1,22 @@
-class UsersController < ApplicationController
-  
+class TagsController < ApplicationController
+   
   #before_action :api_authenticate, only: [:index, :show]
   
   rescue_from ActionController::UnknownFormat, with: :raise_bad_format
   
-  #Visar samtliga användare
+  #Visar samtliga taggar
   def index
-    @users = User.all
-    respond_with @users
+    @tags = Tag.all
+    respond_with @tags
   end
   
-  #Visar en användare och de turistattraktioner denna användare skapat
+  #Visar en tagg och alla turistattraktioner tillhörande denna tagg
   def show
-    @user = User.find(params[:id])
-    respond_with @user
+    @tag = Tag.find(params[:id])
+    respond_with @tag
     
     rescue ActiveRecord::RecordNotFound
-    @error = ErrorMessage.new("Resursen hittades ej", "Användaren hittades ej")
+    @error = ErrorMessage.new("Resursen hittades ej", "Taggen hittades ej")
     respond_with  @error, status: :not_found
     
   end
@@ -36,5 +36,4 @@ class ErrorMessage
     @developerMessage = dev_mess
     @userMessage = usr_mess
   end
-
 end

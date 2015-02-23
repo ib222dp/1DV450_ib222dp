@@ -10,6 +10,16 @@
 
   <%= f.label :address %><br />
   <%= f.text_field :address %> <br />
+
+  <%= f.label :tag do %>
+    <% for tag in Tag.all %>
+    <div>
+      <%= check_box_tag "attraction[tag_ids][]", tag.id,  @attraction.tags.include?(tag) %>
+      <%= tag.name %>
+    </div>
+    <% end %>
+  <% end %>
+
   
   <%= f.submit "Skapa ny turistattraktion", class: "btn btn-primary" %>
 <% end %>

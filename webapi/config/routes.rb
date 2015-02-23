@@ -1,20 +1,21 @@
 Rails.application.routes.draw do
-  #get 'attractions/new'
-
+  
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
-
-  # You can have the root of your site routed with "root"
-  root :to => redirect('/login')
-  get '/login' => 'sessions#new'
-  post '/login' => 'sessions#create'
   
+  # You can have the root of your site routed with "root"
+  #root :to => redirect('/login')
+  
+  post '/login' => 'sessions#create'
   post '/auth' => 'sessions#api_auth'
   
   resources :users do
     resources :attractions, only: [:index]
   end
-  resources :attractions, only: [:new, :create, :index, :show]
+  resources :tags do
+    resources :attractions, only: [:index]
+  end
+  resources :attractions, only: [:index, :show, :new, :create] 
   
   get '/logout'  => 'sessions#destroy'  
   
