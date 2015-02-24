@@ -1,10 +1,11 @@
 class TagsController < ApplicationController
   
-  #before_action :api_authenticate
+  #before_action :check_apikey
+  before_action :offset_params, only: [:index]
   
   #Visar samtliga taggar (och alla turistattraktioner tillhörande dessa taggar)
   def index
-    @tags = Tag.all
+    @tags = Tag.limit(@limit).offset(@offset).all
     respond_with @tags
   end
   
@@ -12,10 +13,6 @@ class TagsController < ApplicationController
   def show
     @tag = Tag.find(params[:id])
     respond_with @tag
-    
-    rescue ActiveRecord::RecordNotFound
-    @error = ErrorMessage.new("Resursen hittades ej", "Taggen hittades ej")
-    respond_with  @error, status: :not_found
   end
 
 end

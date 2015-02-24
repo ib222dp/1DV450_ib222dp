@@ -1,10 +1,11 @@
 class UsersController < ApplicationController
   
-  #before_action :api_authenticate
+  #before_action :check_apikey
+  before_action :offset_params, only: [:index]
   
   #Visar samtliga användare (och de turistattraktioner dessa användare skapat)
   def index
-    @users = User.all
+    @users = User.limit(@limit).offset(@offset).all
     respond_with @users
   end
   
@@ -12,10 +13,6 @@ class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
     respond_with @user
-    
-    rescue ActiveRecord::RecordNotFound
-    @error = ErrorMessage.new("Resursen hittades ej", "Användaren hittades ej")
-    respond_with  @error, status: :not_found
   end
   
 end
