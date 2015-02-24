@@ -1,12 +1,6 @@
 class AttractionsController < ApplicationController
   
-  respond_to :json
-  
-  #before_action :api_authenticate, only: [:index, :show]
-  #before_action :check_user, only: [:new, :create]
-  before_action :set_no_cache, only: [:new, :create]
-  
-  #rescue_from ActionController::UnknownFormat, with: :raise_bad_format
+  #before_action :api_authenticate
   
   #Visar samtliga turistattraktioner skapade av en viss användare,
   #samtliga turistattraktioner tillhörande en viss tagg,
@@ -42,7 +36,17 @@ class AttractionsController < ApplicationController
   def create
     respond_with Attraction.create(address: params[:address], created_at: Time.now, updated_at: Time.now,
       user_id: params[:user_id], latitude: params[:latitude], longitude: params[:longitude] ), status: :created
-    #@attraction = Attraction.new(attraction_params)
+  end
+ 
+end
+
+ #before_action :check_user, only: [:new, :create]
+
+ #def attraction_params
+   # params.require(:attraction).permit(:address, :latitude, :longitude, { :tag_ids => [] } ) 
+  #end
+
+  #@attraction = Attraction.new(attraction_params)
     #user = User.find(session[:user_id])
     #@attraction.user_id = user.id
     
@@ -51,26 +55,3 @@ class AttractionsController < ApplicationController
     #else
      # render 'new'
     #end
-  end
-  
-  private
-  
-  def attraction_params
-    params.require(:attraction).permit(:address, :latitude, :longitude, { :tag_ids => [] } ) 
-  end
-  
-  def raise_bad_format
-    @error = ErrorMessage.new("API:et stöder inte det begärda formatet", "API:et stöder inte det begärda formatet")
-    render json: @error, status: :bad_request
-  end
-  
-end
-
-class ErrorMessage
-  
-  def initialize(dev_mess, user_mess)
-    @developerMessage = dev_mess
-    @userMessage = user_mess
-  end
-
-end

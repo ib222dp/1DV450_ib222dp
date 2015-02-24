@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   # You can have the root of your site routed with "root"
   #root :to => redirect('/login')
   
-  post '/login' => 'sessions#create'
+  post '/login' => 'sessions#api_auth'
   post '/auth' => 'sessions#api_auth'
   
   resources :users do
@@ -15,9 +15,9 @@ Rails.application.routes.draw do
   resources :tags do
     resources :attractions, only: [:index]
   end
-  resources :attractions, only: [:index, :show, :new, :create] 
+  resources :attractions
   
-  get '/logout'  => 'sessions#destroy'  
+  #get '/logout'  => 'sessions#destroy'  
   
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
