@@ -1,28 +1,31 @@
-== README
+* Jag har inte publicerat applikationen, så det är nog enklast att klona repot från GitHub till Nitrous och testköra applikationen därifrån
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+* Om du använder ett IDE i Windows (t.ex. RubyMine) så måste du lägga till 'tzinfo-data' i Gemfile och sedan köra bundle install innan du kör rake    db:migrate för att skapa databasen
 
-Things you may want to cover:
+* Om du använder Nitrous är det möjligt att du behöver köra "rails s -b, --binding=0.0.0.0" i stället för bara "rails server" för att testköra applikationen
 
-* Ruby version
+* Version Ruby: 2.1.1p76 (2014-02-24 revision 45161) [x86_64-linux]
 
-* System dependencies
+* Version Rails: 4.2.0
 
-* Configuration
+* IDE: Nitrous
 
-* Database creation
+* Testdata i webapi/db/seeds.rb (Kör rake db:seed för att återställa testdata)
 
-* Database initialization
+* Databastabeller och index i webapi/db/schema.rb
 
-* How to run the test suite
+* webapi/db/development.sqlite3 kan laddas ner och sedan öppnas med DB Browser for SQLite (sqlitebrowser.org)
 
-* Services (job queues, cache servers, search engines, etc.)
+* Tillagt i webapi/environments/development.rb: config.baseurl = "http://jolly-good-highgarden-94-186247.euw1.nitrousbox.com"
 
-* Deployment instructions
+* Tillagt i webapi/environments/test.rb: config.baseurl = "http://localhost:3000"
 
-* ...
+* Tillagda gems i Gemfile:  
 
+gem 'bcrypt', '~> 3.1.7'
 
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+gem 'responders', '~> 2.0'
+
+gem 'jwt'
+
+gem 'geocoder'

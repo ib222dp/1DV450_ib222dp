@@ -1,6 +1,6 @@
 class TagsController < ApplicationController
   
-  #before_action :check_apikey
+  before_action :check_apikey
   before_action :offset_params, only: [:index]
   
   #Visar samtliga taggar (och alla turistattraktioner tillhörande dessa taggar)

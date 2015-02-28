@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   
-  #before_action :check_apikey
+  before_action :check_apikey
   before_action :offset_params, only: [:index]
   
   #Visar samtliga användare (och de turistattraktioner dessa användare skapat)

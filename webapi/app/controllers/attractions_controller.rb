@@ -1,7 +1,7 @@
 class AttractionsController < ApplicationController
   
-  #before_action :api_authenticate, only: [:create, :update, :destroy]
-  #before_action :check_apikey, only: [:index, :show]
+  before_action :api_authenticate, only: [:create, :update, :destroy]
+  before_action :check_apikey, only: [:index, :show]
   before_action :offset_params, only: [:index]
   
   def index
@@ -38,6 +38,21 @@ class AttractionsController < ApplicationController
   def create
     attraction = Attraction.new(attraction_params)
     
+    user = User.find_by_id(attraction.user_id)
+    if user = nil
+      error = ErrorMessage.new("Resursen kunde inte skapas. Användar-id finns inte.", "Turistattraktionen kunde inte skapas. 
+                                Användar-id finns inte.")
+      render json: error, status: :bad_request
+    end
+    
+    attraction.tags.each do |t|
+      tag = Tag.find_by_id(t.id)
+      if tag = nil
+        error = ErrorMessage.new("Resursen kunde inte skapas. Tagg-id finns inte.", "Turistattraktionen kunde inte skapas. Tagg-id finns inte.")
+        render json: error, status: :bad_request
+      end
+    end
+    
     if attraction.save
       respond_with attraction, status: :created
     else
@@ -48,19 +63,46 @@ class AttractionsController < ApplicationController
   
   #Uppdaterar en turistattraktion
   def update
-    respond_with Attraction.update(params[:id], attraction_params)
+    attraction = Attraction.update(params[:id], attraction_params)
+    
+    user = User.find_by_id(attraction.user_id)
+    if user = nil
+      error = ErrorMessage.new("Resursen kunde inte uppdateras. Användar-id finns inte.", "Turistattraktionen kunde inte uppdateras. Användar-id                                     finns inte.")
+      render json: error, status: :bad_request
+    end
+    
+    attraction.tags.each do |t|
+      tag = Tag.find_by_id(t.id)
+      if tag = nil
+        error = ErrorMessage.new("Resursen kunde inte uppdateras. Tagg-id finns inte.", "Turistattraktionen kunde inte uppdateras. Tagg-id finns                                       inte.")
+        render json: error, status: :bad_request
+      end
+    end
+    
+    if attraction.save
+      respond_with attraction, status: :ok
+    else
+      error = ErrorMessage.new("Resursen kunde inte uppdateras", "Turistattraktionen kunde inte uppdateras")
+      render json: error, status: :bad_request
+    end
   end
   
   #Raderar en turistattraktion
   def destroy
-    respond_with Attraction.destroy(params[:id])#, status: :no_content
+    attraction = Attraction.find(params[:id])
+    if attraction.destroy
+      respond_with status: :no_content
+    else
+      error = ErrorMessage.new("Resursen kunde inte raderas", "Turistattraktionen kunde inte raderas")
+      render json: error, status: :bad_request
+    end
   end
   
   private
   
   def attraction_params
     json_params = ActionController::Parameters.new(JSON.parse(request.body.read))
-    json_params.require(:attraction).permit(:address, :user_id, :latitude, :longitude)
+    json_params.require(:attraction).permit(:address, :user_id, :latitude, :longitude, :tag_ids => [] )
   end
 
 end
