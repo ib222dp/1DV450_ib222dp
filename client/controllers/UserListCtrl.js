@@ -1,9 +1,7 @@
-// register the controller to the module
 angular
   .module("clientApp")
-  .controller("UserListController", UserListController); // registrera med namn, funktion
+  .controller("UserListController", UserListController);
 
-// inject the service
 UserListController.$inject = ['UserService'];
 
 function UserListController(userService) {

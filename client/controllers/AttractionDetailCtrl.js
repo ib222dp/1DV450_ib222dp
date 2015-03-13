@@ -15,7 +15,4 @@ function AttractionDetailController($routeParams, attractionService) {
     vm.message = error;
     console.log("Error: " +error);
   })
-
-  
-
 }

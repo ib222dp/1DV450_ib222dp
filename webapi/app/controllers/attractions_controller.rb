@@ -8,11 +8,11 @@ class AttractionsController < ApplicationController
     #Visar samtliga turistattraktioner skapade av en viss användare,
     if params[:user_id].present?
       @user = User.find(params[:user_id])
-      @attractions = @user.limit(@limit).offset(@offset).attractions
+      @attractions = @user.attractions.limit(@limit).offset(@offset)
     #samtliga turistattraktioner tillhörande en viss tagg,
     elsif params[:tag_id].present?
       @tag = Tag.find(params[:tag_id])
-      @attractions = @tag.limit(@limit).offset(@offset).attractions
+      @attractions = @tag.attractions.limit(@limit).offset(@offset)
     #samtliga turistattraktioner som inte ligger längre än 80 km ifrån en viss plats (URL .../attractions?latitude=värde&longitude=värde),
     elsif params[:latitude].present? && params[:longitude].present?
       #Metod från gem Geocoder

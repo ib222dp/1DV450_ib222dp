@@ -1,15 +1,13 @@
 <div class="container">
-  <h3>List all players</h3>
+  <h3>Attractions</h3>
   <div class="col-md-6">
     <table class="table">
       <thead>
         <tr>
-          <th>Name</th>
-          <th>Age</th>
-          <th>Team</th>
+          <th>Address</th>
         </tr>
         <tr data-ng-repeat="_attraction in attractions.attractionList">
-          <td>{{ _attraction.name }}</td>
+          <td>{{ _attraction.address }}</td>
           <td><a data-ng-href="attraction/{{_attraction.id}}">More info</a></td>
         </tr>
       </thead>

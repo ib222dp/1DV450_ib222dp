@@ -35,10 +35,10 @@ angular
     })
     .constant('API', { 
       'key': "ec5e58d004bcbde0b409bd90593cc28f", 
-      'url': "http://jolly-good-highgarden-94-186247.euw1-2.nitrousbox.com/", // base url
-      'format': 'application/json' // Default representation we want
+      'url': "http://jolly-good-highgarden-94-186247.euw1.nitrousbox.com/",
+      'format': 'application/json'
     })
     .constant('LocalStorageConstants', {
-      'attractionsKey' : 'p', // just some keys for sessionStorage-keys
+      'attractionsKey' : 'p',
       'usersKey'   : 't'
     });
