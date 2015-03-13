@@ -1,7 +1,7 @@
 class AttractionsController < ApplicationController
   
   before_action :api_authenticate, only: [:create, :update, :destroy]
-  before_action :check_apikey, only: [:index, :show]
+  before_action :check_apikey
   before_action :offset_params, only: [:index]
   
   def index

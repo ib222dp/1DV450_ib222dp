@@ -12,7 +12,7 @@ class Tag < ActiveRecord::Base
   
   def serializable_hash (options={})
     options = {
-      only: [:name],
+      only: [:name, :id],
       include: [:attractions],
       methods: [:self_link]
     }.update(options)

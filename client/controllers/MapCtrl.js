@@ -1,10 +1,8 @@
 angular
   .module("clientApp")
-  .controller("MapController", MapController);
+  .controller("MapController", ['$scope',
 
-MapController.$inject = ["ngMap", "$scope"]
-
-function MapController(ngMap, $scope){
+function MapController ($scope){
       
   var vm = this;
   var map;
@@ -18,4 +16,4 @@ function MapController(ngMap, $scope){
     };
   });
   return vm;
-}
+}]);

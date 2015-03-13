@@ -1,5 +1,5 @@
 angular
-  .module('clientApp', ['ngRoute', 'LocalStorageModule'])
+  .module('clientApp', ['ngRoute', 'LocalStorageModule', 'ngMap'])
   .config(['$routeProvider', '$locationProvider',
     function($routeProvider, $locationProvider) {
       $routeProvider.
@@ -21,10 +21,15 @@ angular
           controller: 'UserListController',
           controllerAs: 'users'
         }).
+        when('/tags', {
+          templateUrl: 'partials/tag-list.html',
+          controller: 'TagListController',
+          controllerAs: 'tags'
+        }).
          when('/map', {
           templateUrl: 'partials/map.html',
           controller: 'MapController',
-          controllerAs: 'map'
+          controllerAs: 'mapctrl'
           }).
         otherwise({
           redirectTo: '/'
@@ -44,6 +49,7 @@ angular
       'format': 'application/json'
     })
     .constant('LocalStorageConstants', {
-      'attractionsKey' : 'p',
-      'usersKey'   : 't'
+      'attractionsKey' : 'a',
+      'usersKey'   : 'u',
+      'tagsKey'    : 't'
     });
