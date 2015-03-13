@@ -21,6 +21,11 @@ angular
           controller: 'UserListController',
           controllerAs: 'users'
         }).
+         when('/map', {
+          templateUrl: 'partials/map.html',
+          controller: 'MapController',
+          controllerAs: 'map'
+          }).
         otherwise({
           redirectTo: '/'
         });

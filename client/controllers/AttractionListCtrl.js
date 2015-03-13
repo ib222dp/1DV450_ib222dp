@@ -2,7 +2,7 @@ angular
   .module("clientApp")
   .controller("AttractionListController", AttractionListController);
 
-AttractionListController.$inject = ['AttractionService'];
+AttractionListController.$inject = ["AttractionService"];
 
 function AttractionListController(attractionService) {
  
