@@ -10,7 +10,7 @@ function AttractionDetailController($routeParams, attractionService) {
   
   var attractionPromise = attractionService.getAttraction($routeParams.id);
   attractionPromise.then(function(data){
-    vm.name = data.name;
+    vm.address = data.address;
   }).catch(function(error){
     vm.message = error;
     console.log("Error: " +error);

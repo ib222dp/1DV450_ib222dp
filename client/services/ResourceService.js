@@ -33,20 +33,20 @@ function ResourceService($http, API) {
         });
     };
   
-    Resource.getSingle = function(resourceInfo) {
+    Resource.getSingle = function(obj) {
 
         var url;
-        console.log(resourceInfo);
+        console.log(obj);
       
-        if(resourceInfo.hasOwnProperty('url')) {
-            url = resourceInfo.url;
-        }
-        else if(resourceInfo.hasOwnProperty('instanceName') && resourceInfo.hasOwnProperty('id')) {
-            url = API.url +resourceInfo.instanceName +"/" +resourceInfo.id
-        }
-        else {
-          return false;
-        }
+        //if(resourceInfo.hasOwnProperty('url')) {
+          //  url = resourceInfo.url;
+        //}
+        //else if(resourceInfo.hasOwnProperty('instanceName') && resourceInfo.hasOwnProperty('id')) {
+            url = API.url +obj.instanceName +"/" + obj.id
+        //}
+        //else {
+          //return false;
+        //}
  
         var req = {
             method: 'GET',
@@ -65,7 +65,7 @@ function ResourceService($http, API) {
     Resource.save = function(collectionName, data) {
         var req = {
             method: 'POST',
-            url: API.url +collectionName, // this is the entry point in my example
+            url: API.url +collectionName,
             headers: {
                 'Accept': API.format,
                 'X-ApiKey': API.key,

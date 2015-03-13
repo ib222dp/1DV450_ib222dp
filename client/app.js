@@ -4,14 +4,16 @@ angular
     function($routeProvider, $locationProvider) {
       $routeProvider.
         when('/', {
-          templateUrl: 'partials/index.html'
+        templateUrl: 'partials/map.html',
+        controller: 'MapController',
+        controllerAs: 'mapctrl'
         }).
         when('/attractions', {
           templateUrl: 'partials/attraction-list.html',
           controller: 'AttractionListController',
           controllerAs: 'attractions'
         }).
-        when('/attraction/:id', {
+        when('/attractions/:id', {
           templateUrl: 'partials/attraction-detail.html',
           controller: 'AttractionDetailController',
           controllerAs: 'attraction'
@@ -26,11 +28,6 @@ angular
           controller: 'TagListController',
           controllerAs: 'tags'
         }).
-         when('/map', {
-          templateUrl: 'partials/map.html',
-          controller: 'MapController',
-          controllerAs: 'mapctrl'
-          }).
         otherwise({
           redirectTo: '/'
         });
