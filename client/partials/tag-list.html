@@ -6,12 +6,11 @@
         <tr>
           <th>Name</th>
         </tr>
-        <tr data-ng-repeat="_tag in tags.tagList">
-          <td>{{ _tag.name }}</td>
-          <td><a data-ng-href="tags/{{_tag.id}}">More info</a></td>
+        <tr data-ng-repeat="t in tags.tagList">
+          <td>{{ t.name | uppercase }}</td>
+          <td><a data-ng-href="tags/{{t.id}}">More info</a></td>
         </tr>
       </thead>
      </table>
   </div>
- 
 </div>

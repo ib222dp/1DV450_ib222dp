@@ -7,7 +7,8 @@
           <th>Name</th>
         </tr>
         <tr data-ng-repeat="u in users.userList">
-          <td>{{ u.username }}</td>
+          <td>{{ u.username | uppercase }}</td>
+          <td><a data-ng-href="users/{{u.id}}">More info</a></td>
         </tr>
       </thead>
      </table>

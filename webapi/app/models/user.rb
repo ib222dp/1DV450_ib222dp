@@ -6,7 +6,7 @@ class User < ActiveRecord::Base
   
   def serializable_hash (options={})
     options = {
-      only: [:username],
+      only: [:username, :id],
       include: [:attractions],
       methods: [:self_link]
     }.update(options)

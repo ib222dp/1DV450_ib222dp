@@ -4,9 +4,9 @@ angular
     function($routeProvider, $locationProvider) {
       $routeProvider.
         when('/', {
-        templateUrl: 'partials/map.html',
-        controller: 'MapController',
-        controllerAs: 'mapctrl'
+        templateUrl: 'partials/login.html',
+        controller: 'LoginController',
+        controllerAs: 'loginctrl'
         }).
         when('/attractions', {
           templateUrl: 'partials/attraction-list.html',
@@ -23,10 +23,25 @@ angular
           controller: 'UserListController',
           controllerAs: 'users'
         }).
+        when('/users/:id', {
+          templateUrl: 'partials/user-detail.html',
+          controller: 'UserDetailController',
+          controllerAs: 'user'
+        }).
         when('/tags', {
           templateUrl: 'partials/tag-list.html',
           controller: 'TagListController',
           controllerAs: 'tags'
+        }).
+        when('/tags/:id', {
+          templateUrl: 'partials/tag-detail.html',
+          controller: 'TagDetailController',
+          controllerAs: 'tag'
+        }).
+        when('/map', {
+         templateUrl: 'partials/map.html',
+          controller: 'MapController',
+          controllerAs: 'mapctrl'
         }).
         otherwise({
           redirectTo: '/'
@@ -47,6 +62,6 @@ angular
     })
     .constant('LocalStorageConstants', {
       'attractionsKey' : 'a',
-      'usersKey'   : 'u',
-      'tagsKey'    : 't'
+      'tagsKey'    : 't',
+      'usersKey'   : 'u'
     });

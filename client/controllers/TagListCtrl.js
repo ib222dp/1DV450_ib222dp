@@ -5,10 +5,16 @@ angular
 TagListController.$inject = ['TagService'];
 
 function TagListController(tagService) {
+  
   var vm = this;
   
-  tagService.get().then(function(data) {
-    console.log(data);
+  var tagPromise = tagService.get();
+  
+  tagPromise
+    .then(function(data){
     vm.tagList = data;
+  })
+    .catch(function(error) {
+    console.log("ERROR");
   });
 }

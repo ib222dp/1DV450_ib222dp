@@ -1,6 +1,6 @@
 angular
   .module("clientApp")
-  .controller("MapController", ['$scope',
+  .controller("MapController", ['scope',
 
 function MapController ($scope){
       

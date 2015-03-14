@@ -42,6 +42,7 @@ angular
 
         return deferred.promise;
       },
+      
       saveAttraction:function(data) {
         
         data = { "attraction":

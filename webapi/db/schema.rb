@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150223124538) do
+ActiveRecord::Schema.define(version: 20150314181941) do
 
   create_table "attractions", force: :cascade do |t|
     t.string   "address"
@@ -29,6 +29,9 @@ ActiveRecord::Schema.define(version: 20150223124538) do
     t.integer "attraction_id"
     t.integer "tag_id"
   end
+
+  add_index "attractions_tags", ["attraction_id"], name: "index_attractions_tags_on_attraction_id"
+  add_index "attractions_tags", ["tag_id"], name: "index_attractions_tags_on_tag_id"
 
   create_table "tags", force: :cascade do |t|
     t.string   "name"

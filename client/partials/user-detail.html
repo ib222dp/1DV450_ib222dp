@@ -1,12 +1,12 @@
 <div class="container">
-  <h3>Attractions</h3>
+  <h1> {{ user.username | uppercase }}</h1>
   <div class="col-md-6">
     <table class="table">
       <thead>
         <tr>
-          <th>Address</th>
+          <th>Attractions</th>
         </tr>
-        <tr data-ng-repeat="a in attractions.attractionList">
+        <tr data-ng-repeat="a in user.attractions">
           <td>{{ a.address | uppercase }}</td>
           <td><a data-ng-href="attractions/{{a.id}}">More info</a></td>
         </tr>

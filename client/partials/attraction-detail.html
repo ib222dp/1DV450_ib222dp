@@ -1,6 +1,15 @@
-<div>
-  <h1>Information about the attraction</h1>
-  <p>
-    Attraction: {{ attraction.address }}
-  </p>
+<div class="container">
+  <h1> {{ attraction.address | uppercase }}</h1>
+  <div class="col-md-6">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Tags</th>
+        </tr>
+        <tr data-ng-repeat="t in attraction.tags">
+          <td>{{ t.name | uppercase }}</td>
+        </tr>
+      </thead>
+     </table>
+  </div>
 </div>

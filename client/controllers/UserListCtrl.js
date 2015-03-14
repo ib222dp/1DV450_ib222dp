@@ -5,10 +5,16 @@ angular
 UserListController.$inject = ['UserService'];
 
 function UserListController(userService) {
+  
   var vm = this;
   
-  userService.get().then(function(data) {
-    console.log(data);
+  var userPromise = userService.get();
+  
+  userPromise
+    .then(function(data){
     vm.userList = data;
+  })
+    .catch(function(error) {
+    console.log("ERROR");
   });
 }
