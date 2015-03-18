@@ -15,6 +15,7 @@ function AttractionListController(attractionService) {
         vm.attractionList = data;
       })
       .catch(function(error) {
-        console.log("ERROR");
+        vm.message = error;
+        console.log(error);
       });
 }

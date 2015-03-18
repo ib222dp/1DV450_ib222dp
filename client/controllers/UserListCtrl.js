@@ -15,6 +15,7 @@ function UserListController(userService) {
     vm.userList = data;
   })
     .catch(function(error) {
-    console.log("ERROR");
+    vm.message = error;
+    console.log(error);
   });
 }

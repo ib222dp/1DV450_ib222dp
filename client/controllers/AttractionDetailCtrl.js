@@ -14,6 +14,6 @@ function AttractionDetailController($routeParams, attractionService) {
     vm.tags = data.tags;
   }).catch(function(error){
     vm.message = error;
-    console.log("Error: " +error);
+    console.log(error);
   })
 }

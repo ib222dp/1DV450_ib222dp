@@ -1,0 +1,19 @@
+<div class="container">
+  <h1> {{ crud.username | uppercase }}</h1>
+  <div class="col-md-6">
+    <p> {{ crud.message}} </p>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Address</th>
+        </tr>
+        <tr data-ng-repeat="a in crud.attractions">
+          <td>{{ a.address | uppercase }}</td>
+         <td><a data-ng-href="attractions/{{a.id}}/edit">Update Attraction</a></td>
+          <td><button type="button" ng-click="crud.deleteAttraction(a.id)">Remove Attraction</button></td>
+            <td><a data-ng-href="attractions/new">Create Attraction</a></td>
+        </tr>
+      </thead>
+     </table>
+  </div>
+</div>

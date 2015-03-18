@@ -18,6 +18,11 @@ angular
           controller: 'AttractionDetailController',
           controllerAs: 'attraction'
         }).
+        when('/attractions/:id/edit', {
+          templateUrl: 'partials/attraction-edit.html',
+          controller: 'AttractionEditController',
+          controllerAs: 'edit'
+        }).
         when('/users', {
           templateUrl: 'partials/user-list.html',
           controller: 'UserListController',
@@ -42,6 +47,11 @@ angular
          templateUrl: 'partials/map.html',
           controller: 'MapController',
           controllerAs: 'mapctrl'
+        }).
+       when('/user-attraction-list', {
+         templateUrl: 'partials/user-attraction-list.html',
+          controller: 'CRUDController',
+          controllerAs: 'crud'
         }).
         otherwise({
           redirectTo: '/'

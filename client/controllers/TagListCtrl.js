@@ -15,6 +15,7 @@ function TagListController(tagService) {
     vm.tagList = data;
   })
     .catch(function(error) {
-    console.log("ERROR");
+    vm.message = error;
+    console.log(error);
   });
 }

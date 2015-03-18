@@ -2,9 +2,9 @@ angular
   .module("clientApp")
   .controller("LoginController", LoginController);
 
-LoginController.$inject = ['$http', '$rootScope'];
+LoginController.$inject = ['$http', '$rootScope', '$location'];
 
-function LoginController($http, $rootScope) {
+function LoginController($http, $rootScope, $location) {
   var vm = this;                               
   $rootScope.isLoggedIn = false;
   
@@ -26,6 +26,7 @@ function LoginController($http, $rootScope) {
       $rootScope.token = data.auth_token;
       $rootScope.user_id = data.user_id;
       $rootScope.isLoggedIn = true;
+      $location.path('/user-attraction-list')
     });
     
     promise.error(function(data, status, headers, config) {

@@ -19,7 +19,6 @@ class Attraction < ActiveRecord::Base
   def serializable_hash (options={} )
     options = {
       only: [:address, :latitude, :longitude, :id],
-      include: [:tags],
       methods: [:self_link]
       }.update(options)
     super(options)

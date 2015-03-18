@@ -2,9 +2,9 @@ angular
     .module("clientApp")
     .factory('ResourceService', ResourceService);
 
-ResourceService.$inject = ['$http', 'API'];
+ResourceService.$inject = ['$http', 'API', '$rootScope'];
 
-function ResourceService($http, API) {
+function ResourceService($http, API, $rootScope) {
 
  return function (collectionName) {
   
@@ -42,7 +42,7 @@ function ResourceService($http, API) {
           //  url = resourceInfo.url;
         //}
         //else if(resourceInfo.hasOwnProperty('instanceName') && resourceInfo.hasOwnProperty('id')) {
-            url = API.url +obj.instanceName +"/" + obj.id
+            url = API.url +obj.instanceName +"/" + obj.id;
         //}
         //else {
           //return false;
@@ -61,7 +61,52 @@ function ResourceService($http, API) {
           return response;
         });
     };
-
+   
+    Resource.delete = function(obj) {
+      
+      var url;
+      console.log(obj);
+      
+      url = API.url +obj.instanceName +"/" + obj.id;
+ 
+        var req = {
+            method: 'DELETE',
+            url: url,
+            headers: {
+                'Accept': API.format,
+                'X-ApiKey': API.key,
+                'Authorization': 'Bearer ' + $rootScope.token
+            }
+        };
+      
+        return $http(req).success(function(response) {
+          return response;
+        });
+    };
+   
+     Resource.update = function(obj, attr) {
+      
+      var url;
+      console.log(obj);
+      
+      url = API.url +obj.instanceName +"/" + obj.id;
+ 
+        var req = {
+            method: 'PUT',
+            url: url,
+            headers: {
+                'Accept': API.format,
+                'X-ApiKey': API.key,
+                'Authorization': 'Bearer ' + $rootScope.token
+            },
+            params: attr
+        };
+      
+        return $http(req).success(function(response) {
+          return response;
+        });
+    };
+   
     Resource.save = function(collectionName, data) {
         var req = {
             method: 'POST',

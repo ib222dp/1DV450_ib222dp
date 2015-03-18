@@ -2,21 +2,29 @@ angular
   .module("clientApp")
   .controller("CRUDController", CRUDController);
 
-CRUDController.$inject = ['$http'];
+CRUDController.$inject = ['$http', '$rootScope', 'UserService', 'AttractionService', '$routeParams'];
   
-function CRUDController($http) { 
+function CRUDController($http, $rootScope, userService, attractionService, $routeParams) { 
+  
   var vm = this;
-  var getConfig = {
-    headers: {
-     "X-ApiKey" : "ec5e58d004bcbde0b409bd90593cc28f",
-     "Accept"   : "application/json"
-    }
-  }
   
-  $http.get("http://jolly-good-highgarden-94-186247.euw1.nitrousbox.com/users/:id", getConfig).success(function(data) {
-    vm.user = data;
-  }).error(function(data, status) {
+  var userPromise = userService.getUser($rootScope.user_id);
+  userPromise.then(function(data){
     console.log(data);
-    vm.alert = data.error;
-  });
+    vm.username = data.username;
+    vm.attractions = data.attractions;
+  }).catch(function(error){
+    vm.message = error;
+    console.log(error);
+  })
+  
+  vm.deleteAttraction = function(id) {
+      var deletePromise = attractionService.deleteAttraction(id);
+  deletePromise.then(function(data){
+   vm.message = "Turistattraktionen har tagits bort";
+  }).catch(function(error){
+    vm.message = error;
+    console.log(error);
+  })
+};  
 }

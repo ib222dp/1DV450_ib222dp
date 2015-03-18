@@ -43,6 +43,44 @@ angular
         return deferred.promise;
       },
       
+      deleteAttraction:function(id){
+          var deferred = $q.defer();
+        
+        var promise;
+        var obj = {'instanceName' : 'attractions', 'id' : id};
+        promise = Attraction.delete(obj);
+        
+        promise.success(function(data){
+          deferred.resolve(data);
+        }).catch(function(){
+          deferred.reject("Something went wrong with the call");
+        });
+
+        return deferred.promise;
+      },
+      
+       updateAttraction:function(id, address){
+          var deferred = $q.defer();
+        
+        var promise;
+        var obj = {'instanceName' : 'attractions', 'id' : id};
+         var attr = { "attraction":
+                  {
+                      "address": address,
+                      "user_id": id
+                  }
+              }
+        promise = Attraction.update(obj, attr);
+        
+        promise.success(function(data){
+          deferred.resolve(data);
+        }).catch(function(){
+          deferred.reject("Something went wrong with the call");
+        });
+
+        return deferred.promise;
+      },
+      
       saveAttraction:function(data) {
         
         data = { "attraction":

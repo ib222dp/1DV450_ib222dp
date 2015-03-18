@@ -1,7 +1,7 @@
 <div class="col-md-4">
           <div class="panel panel-primary">
             <div class="panel-heading">
-              <h3 class="panel-title">Logga in</h3>
+              <h3 class="panel-title">Log in</h3>
             </div>
             <div class="panel-body">
                <form novalidate name="loginctrl.form" class="simple-form">
@@ -9,10 +9,8 @@
                  <input type="email" ng-model="loginctrl.email"/><br />
                  Password: <br />
                  <input type="password" ng-model="loginctrl.password"/>
-                 <button data-ng-click="loginctrl.login()">Logga in</button>
+                 <button data-ng-click="loginctrl.login()">Log in</button>
                </form>
-               <p>Token: {{$root.token}}</p>
-              <p>Id: {{$root.user_id}}</p>
             </div>
          </div>
      </div>

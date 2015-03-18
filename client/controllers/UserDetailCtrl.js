@@ -14,6 +14,6 @@ function UserDetailController($routeParams, userService) {
     vm.attractions = data.attractions;
   }).catch(function(error){
     vm.message = error;
-    console.log("Error: " +error);
+    console.log(error);
   })
 }
