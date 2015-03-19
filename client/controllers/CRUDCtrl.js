@@ -10,12 +10,10 @@ function CRUDController($http, $rootScope, userService, attractionService, $rout
   
   var userPromise = userService.getUser($rootScope.user_id);
   userPromise.then(function(data){
-    console.log(data);
     vm.username = data.username;
     vm.attractions = data.attractions;
   }).catch(function(error){
     vm.message = error;
-    console.log(error);
   })
   
   vm.deleteAttraction = function(id) {
@@ -24,7 +22,6 @@ function CRUDController($http, $rootScope, userService, attractionService, $rout
    vm.message = "Turistattraktionen har tagits bort";
   }).catch(function(error){
     vm.message = error;
-    console.log(error);
   })
 };  
 }

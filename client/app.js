@@ -1,5 +1,5 @@
 angular
-  .module('clientApp', ['ngRoute', 'LocalStorageModule', 'ngMap'])
+  .module('clientApp', ['ngRoute', 'LocalStorageModule', 'ngMap', 'tagListDirective'])
   .config(['$routeProvider', '$locationProvider',
     function($routeProvider, $locationProvider) {
       $routeProvider.

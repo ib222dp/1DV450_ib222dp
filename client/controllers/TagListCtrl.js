@@ -6,7 +6,7 @@ TagListController.$inject = ['TagService'];
 
 function TagListController(tagService) {
   
-  var vm = this;
+  /*var vm = this;
   
   var tagPromise = tagService.get();
   
@@ -17,5 +17,5 @@ function TagListController(tagService) {
     .catch(function(error) {
     vm.message = error;
     console.log(error);
-  });
+  });*/
 }

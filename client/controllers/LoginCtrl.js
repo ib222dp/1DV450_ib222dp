@@ -20,9 +20,6 @@ function LoginController($http, $rootScope, $location) {
     
     var promise = $http.post(url, data, config);
     promise.success(function(data, status, headers, config) {
-      console.log(data);
-      console.log(status);
-      console.log(config)
       $rootScope.token = data.auth_token;
       $rootScope.user_id = data.user_id;
       $rootScope.isLoggedIn = true;
@@ -30,9 +27,6 @@ function LoginController($http, $rootScope, $location) {
     });
     
     promise.error(function(data, status, headers, config) {
-      console.log(data);
-      console.log(status);
-      console.log(config)
       $rootScope.token = data.error;
       $rootScope.isLoggedIn = false;
     });

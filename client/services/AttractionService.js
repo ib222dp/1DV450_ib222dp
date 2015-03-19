@@ -87,8 +87,7 @@ angular
          var obj = {'instanceName' : 'attractions'};
         var attr = { "attraction":
                   {
-                      "address": address,
-                      "user_id": $rootScope.user_id
+                      "address": address
                   }
               }
        promise = Attraction.create(obj, attr);
