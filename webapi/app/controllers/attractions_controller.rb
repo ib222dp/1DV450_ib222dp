@@ -38,20 +38,7 @@ class AttractionsController < ApplicationController
   def create
     attraction = Attraction.new(attraction_params)
     
-    user = User.find_by_id(attraction.user_id)
-    if user = nil
-      error = ErrorMessage.new("Resursen kunde inte skapas. Användar-id finns inte.", "Turistattraktionen kunde inte skapas. 
-                                Användar-id finns inte.")
-      render json: error, status: :bad_request
-    end
-    
-    attraction.tags.each do |t|
-      tag = Tag.find_by_id(t.id)
-      if tag = nil
-        error = ErrorMessage.new("Resursen kunde inte skapas. Tagg-id finns inte.", "Turistattraktionen kunde inte skapas. Tagg-id finns inte.")
-        render json: error, status: :bad_request
-      end
-    end
+    attraction.user_id = @token_payload["user_id"]
     
     if attraction.save
       respond_with attraction, status: :created
@@ -63,27 +50,23 @@ class AttractionsController < ApplicationController
   
   #Uppdaterar en turistattraktion
   def update
-    attraction = Attraction.update(params[:id], attraction_params)
+    attraction = Attraction.find_by_id(params[:id].to_i)
     
-    user = User.find_by_id(attraction.user_id)
-    if user = nil
-      error = ErrorMessage.new("Resursen kunde inte uppdateras. Användar-id finns inte.", "Turistattraktionen kunde inte uppdateras. Användar-id                                     finns inte.")
-      render json: error, status: :bad_request
-    end
+    attraction.tags.delete_all
     
-    attraction.tags.each do |t|
-      tag = Tag.find_by_id(t.id)
-      if tag = nil
-        error = ErrorMessage.new("Resursen kunde inte uppdateras. Tagg-id finns inte.", "Turistattraktionen kunde inte uppdateras. Tagg-id finns                                       inte.")
+    user = attraction.user
+    
+    if @token_payload["user_id"].to_i == user.id
+      attraction.update(attraction_params)
+      if attraction.save
+        respond_with attraction, status: :ok
+      else
+        error = ErrorMessage.new("Resursen kunde inte uppdateras", "Turistattraktionen kunde inte uppdateras")
         render json: error, status: :bad_request
       end
-    end
-    
-    if attraction.save
-      respond_with attraction, status: :ok
     else
-      error = ErrorMessage.new("Resursen kunde inte uppdateras", "Turistattraktionen kunde inte uppdateras")
-      render json: error, status: :bad_request
+      error = ErrorMessage.new(".", ".")
+      render json: error, status: :forbidden
     end
   end
   
@@ -102,7 +85,7 @@ class AttractionsController < ApplicationController
   
   def attraction_params
     json_params = ActionController::Parameters.new(JSON.parse(request.body.read))
-    json_params.require(:attraction).permit(:address, :user_id, :latitude, :longitude, :tag_ids => [] )
+    json_params.require(:attraction).permit(:address, :latitude, :longitude, tags_attributes: [:name] )
   end
 
 end

@@ -9,9 +9,8 @@ function AttractionEditController($routeParams, attractionService) {
   var vm = this;
   
   vm.updateAttraction = function() {
-    
-      var address = {'address' : vm.address};
-      var updatePromise = attractionService.updateAttraction($routeParams.id, address);
+ 
+      var updatePromise = attractionService.updateAttraction($routeParams.id, vm.address);
   updatePromise.then(function(data){
    vm.message = "Turistattraktionen har uppdaterats";
   }).catch(function(error){

@@ -23,6 +23,11 @@ angular
           controller: 'AttractionEditController',
           controllerAs: 'edit'
         }).
+        when('/new', {
+          templateUrl: 'partials/attraction-new.html',
+          controller: 'AttractionCreateController',
+          controllerAs: 'create'
+        }).
         when('/users', {
           templateUrl: 'partials/user-list.html',
           controller: 'UserListController',

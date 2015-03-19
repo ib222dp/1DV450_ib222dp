@@ -1,0 +1,15 @@
+<div class="col-md-4">
+          <div class="panel panel-primary">
+            <div class="panel-heading">
+              <h3 class="panel-title">Create Attraction</h3>
+            </div>
+              <p> {{ create.message}} </p>
+            <div class="panel-body">
+               <form novalidate name="create.form" class="simple-form">
+                 Address: <br />
+                 <input type="address" ng-model="create.address"/><br />
+                 <button data-ng-click="create.createAttraction()">Create attraction</button>
+               </form>
+            </div>
+         </div>
+     </div>

@@ -2,9 +2,9 @@ angular
   .module("clientApp")
   .factory('AttractionService', AttractionService);
 
-  AttractionService.$inject = ['ResourceService', 'localStorageService', 'LocalStorageConstants', '$q'];
+  AttractionService.$inject = ['ResourceService', 'localStorageService', 'LocalStorageConstants', '$q', '$rootScope'];
   
-  function AttractionService(Resource, LocalStorage, LS, $q) {
+  function AttractionService(Resource, LocalStorage, LS, $q, $rootScope) {
     
     var Attraction = Resource('attractions');
     return {
@@ -67,7 +67,7 @@ angular
          var attr = { "attraction":
                   {
                       "address": address,
-                      "user_id": id
+                     
                   }
               }
         promise = Attraction.update(obj, attr);
@@ -81,17 +81,25 @@ angular
         return deferred.promise;
       },
       
-      saveAttraction:function(data) {
-        
-        data = { "attraction":
+      createAttraction:function(address) {
+         var deferred = $q.defer();
+          var promise;
+         var obj = {'instanceName' : 'attractions'};
+        var attr = { "attraction":
                   {
-                      "name": "From AngularJS"
+                      "address": address,
+                      "user_id": $rootScope.user_id
                   }
               }
-        var promise = Attraction.save('attractions', data).then(function(data) {
-          console.log(data);
+       promise = Attraction.create(obj, attr);
+          promise.success(function(data){
+          deferred.resolve(data);
+        }).catch(function(){
+          deferred.reject("Something went wrong with the call");
         });
-        return promise;
+
+        return deferred.promise;
+    
       }
     };
   }

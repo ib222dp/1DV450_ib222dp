@@ -34,20 +34,9 @@ function ResourceService($http, API, $rootScope) {
     };
   
     Resource.getSingle = function(obj) {
-
         var url;
-        console.log(obj);
-      
-        //if(resourceInfo.hasOwnProperty('url')) {
-          //  url = resourceInfo.url;
-        //}
-        //else if(resourceInfo.hasOwnProperty('instanceName') && resourceInfo.hasOwnProperty('id')) {
-            url = API.url +obj.instanceName +"/" + obj.id;
-        //}
-        //else {
-          //return false;
-        //}
- 
+      url = API.url +obj.instanceName +"/" + obj.id;
+       
         var req = {
             method: 'GET',
             url: url,
@@ -63,10 +52,7 @@ function ResourceService($http, API, $rootScope) {
     };
    
     Resource.delete = function(obj) {
-      
       var url;
-      console.log(obj);
-      
       url = API.url +obj.instanceName +"/" + obj.id;
  
         var req = {
@@ -85,10 +71,7 @@ function ResourceService($http, API, $rootScope) {
     };
    
      Resource.update = function(obj, attr) {
-      
       var url;
-      console.log(obj);
-      
       url = API.url +obj.instanceName +"/" + obj.id;
  
         var req = {
@@ -99,7 +82,7 @@ function ResourceService($http, API, $rootScope) {
                 'X-ApiKey': API.key,
                 'Authorization': 'Bearer ' + $rootScope.token
             },
-            params: attr
+            data: attr
         };
       
         return $http(req).success(function(response) {
@@ -107,24 +90,24 @@ function ResourceService($http, API, $rootScope) {
         });
     };
    
-    Resource.save = function(collectionName, data) {
+    Resource.create = function(obj, attr) {
+       var url;
+      url = API.url +obj.instanceName;
+      
         var req = {
             method: 'POST',
-            url: API.url +collectionName,
+            url: url,
             headers: {
                 'Accept': API.format,
                 'X-ApiKey': API.key,
-                'Authorization' : "hbhj6765g76g77rt7g9g6r56dvv"
+                'Authorization' : 'Bearer ' + $rootScope.token
             },
-            params: {
-               
-            },
-            data : data
+            data : attr
           };
-          return $http(req).then(function(response){
-            return new Resource(response.data);
+          return $http(req).success(function(response){
+            return response;
           });
       };
-      return Resource;
+   return Resource;
  }
-};
+}
