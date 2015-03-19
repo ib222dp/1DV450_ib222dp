@@ -37,7 +37,7 @@ angular
           LocalStorage.set(localStorageKey, data);
           deferred.resolve(data);
         }).catch(function(){
-          deferred.reject("Something went wrong with the call");
+          deferred.reject("Something went wrong, try again");
         });
 
         return deferred.promise;
@@ -53,13 +53,13 @@ angular
         promise.success(function(data){
           deferred.resolve(data);
         }).catch(function(){
-          deferred.reject("Something went wrong with the call");
+          deferred.reject("Something went wrong, try again");
         });
 
         return deferred.promise;
       },
       
-       updateAttraction:function(id, address){
+       updateAttraction:function(id, address, tagArray){
           var deferred = $q.defer();
         
         var promise;
@@ -67,6 +67,7 @@ angular
          var attr = { "attraction":
                   {
                       "address": address,
+                      "tag_ids": tagArray 
                      
                   }
               }
@@ -75,7 +76,7 @@ angular
         promise.success(function(data){
           deferred.resolve(data);
         }).catch(function(){
-          deferred.reject("Something went wrong with the call");
+          deferred.reject("Something went wrong, try again");
         });
 
         return deferred.promise;
@@ -94,7 +95,7 @@ angular
           promise.success(function(data){
           deferred.resolve(data);
         }).catch(function(){
-          deferred.reject("Something went wrong with the call");
+          deferred.reject("Something went wrong, try again");
         });
 
         return deferred.promise;

@@ -10,6 +10,11 @@
                  <input type="address" ng-model="edit.address"/><br />
                  <button data-ng-click="edit.updateAttraction()">Update attraction</button>
                </form>
+              
             </div>
          </div>
      </div>
+
+ <label ng-repeat="tag in edit.tagList">
+  <input type="checkbox" name="selectedTags[]" value="{{tag.id}}" data-ng-model="tag.selected"/>{{tag.name | uppercase }}
+ </label>

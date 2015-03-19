@@ -85,7 +85,7 @@ class AttractionsController < ApplicationController
   
   def attraction_params
     json_params = ActionController::Parameters.new(JSON.parse(request.body.read))
-    json_params.require(:attraction).permit(:address, :latitude, :longitude, tags_attributes: [:name] )
+    json_params.require(:attraction).permit(:address, :latitude, :longitude, tag_ids: [] )
   end
 
 end

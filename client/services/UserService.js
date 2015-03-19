@@ -36,7 +36,7 @@ function UserService(Resource, LocalStorage, LS, $q) {
         LocalStorage.set(localStorageKey, data);
         deferred.resolve(data);
       }).catch(function(){
-        deferred.reject("Something went wrong with the call");
+        deferred.reject("Something went wrong, try again");
       });
       
       return deferred.promise;
