@@ -1,19 +1,18 @@
 angular
   .module("clientApp")
-  .controller("MapController", ['$scope',
+  .controller("MapController", MapController);
+              
+MapController.$inject = ['$scope', 'AttractionService'];
 
-function MapController ($scope){
-      
-  var vm = this;
-  var map;
+function MapController ($scope, attractionService){
   
-  $scope.$on('mapInitialized', function(evt, evtMap) {
-    map = evtMap;
-    vm.checkPosition = function(e) {
-      console.log(e.latLng);
-      var marker = new google.maps.Marker({position: e.latLng, map: map});
-      map.panTo(e.latLng);
-    };
+  var attractionPromise = attractionService.get();
+  
+  attractionPromise
+    .then(function(data){
+    $scope.attractionList = data;
+  })
+    .catch(function(error) {
+    console.log(error);
   });
-  return vm;
-}]);
+}

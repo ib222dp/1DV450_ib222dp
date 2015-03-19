@@ -1,4 +1,6 @@
 <div>
-  <map center="56.66830, 16.35315" zoom="8" class="map" on-click="mapctrl.checkPosition()"></map>
+  <map class="map" center="0,0" zoom="1">
+   <marker position="[{{a.latitude}}, {{a.longitude}}]" title="{{a.address | uppercase}}" ng-repeat="a in attractionList"></marker>
+  </map>
 </div>
      

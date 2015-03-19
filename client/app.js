@@ -53,6 +53,11 @@ angular
           controller: 'MapController',
           controllerAs: 'mapctrl'
         }).
+        when('/search', {
+         templateUrl: 'partials/search.html',
+          controller: 'SearchController',
+          controllerAs: 'searchctrl'
+        }).
        when('/user-attraction-list', {
          templateUrl: 'partials/user-attraction-list.html',
           controller: 'CRUDController',
