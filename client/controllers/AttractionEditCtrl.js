@@ -2,9 +2,9 @@ angular
   .module("clientApp")
   .controller("AttractionEditController", AttractionEditController);
 
-AttractionEditController.$inject = ['$routeParams', 'AttractionService', 'TagService', 'filterFilter', '$scope'];
+AttractionEditController.$inject = ['$routeParams', 'AttractionService', 'TagService', 'filterFilter'];
 
-function AttractionEditController($routeParams, attractionService, tagService, filterFilter, $scope) {
+function AttractionEditController($routeParams, attractionService, tagService, filterFilter) {
    
   var vm = this;
   

@@ -82,13 +82,14 @@ angular
         return deferred.promise;
       },
       
-      createAttraction:function(address) {
+      createAttraction:function(address, tagArray) {
          var deferred = $q.defer();
           var promise;
          var obj = {'instanceName' : 'attractions'};
         var attr = { "attraction":
                   {
-                      "address": address
+                      "address": address,
+                      "tag_ids": tagArray 
                   }
               }
        promise = Attraction.create(obj, attr);

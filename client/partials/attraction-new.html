@@ -13,3 +13,7 @@
             </div>
          </div>
      </div>
+
+<label ng-repeat="tag in create.tagList">
+  <input type="checkbox" name="selectedTags[]" value="{{tag.id}}" data-ng-model="tag.selected"/>{{tag.name | uppercase }}
+ </label>
