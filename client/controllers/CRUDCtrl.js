@@ -2,12 +2,13 @@ angular
   .module("clientApp")
   .controller("CRUDController", CRUDController);
 
-CRUDController.$inject = ['$http', '$rootScope', 'UserService', 'AttractionService', '$routeParams'];
+CRUDController.$inject = ['$http', '$rootScope', '$routeParams', 'UserService', 'AttractionService'];
   
-function CRUDController($http, $rootScope, userService, attractionService, $routeParams) { 
+function CRUDController($http, $rootScope, $routeParams, userService, attractionService) { 
   
   var vm = this;
   
+  //Hämtar en inloggad användare
   var userPromise = userService.getUser($rootScope.user_id);
   userPromise.then(function(data){
     vm.username = data.username;
@@ -16,12 +17,13 @@ function CRUDController($http, $rootScope, userService, attractionService, $rout
     vm.message = error;
   })
   
+  //Tar bort en turistattraktion
   vm.deleteAttraction = function(id) {
-      var deletePromise = attractionService.deleteAttraction(id);
-  deletePromise.then(function(data){
-   vm.message = "Turistattraktionen har tagits bort";
-  }).catch(function(error){
-    vm.message = error;
-  })
-};  
+    var deletePromise = attractionService.deleteAttraction(id);
+    deletePromise.then(function(data){
+      vm.message = "The tourist attraction has been deleted.";
+    }).catch(function(error){
+      vm.message = error;
+    })
+  };
 }

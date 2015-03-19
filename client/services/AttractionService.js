@@ -7,8 +7,12 @@ angular
   function AttractionService(Resource, LocalStorage, LS, $q, $rootScope) {
     
     var Attraction = Resource('attractions');
+    
     return {
+      
+      //Hämtar alla turistattraktioner
       get:function() {
+        
         var items = LocalStorage.get(LS.attractionsKey);
         var deferred = $q.defer();
         
@@ -24,12 +28,13 @@ angular
         return deferred.promise;
       },
       
+      //Hämtar en enskild turistattraktion
       getAttraction:function(id) {
         
         var deferred = $q.defer();
-        
         var promise;
         var obj = {'instanceName' : 'attractions', 'id' : id};
+        
         promise = Attraction.getSingle(obj);
         
         promise.success(function(data){
@@ -43,11 +48,13 @@ angular
         return deferred.promise;
       },
       
+      //Tar bort en turistattraktion
       deleteAttraction:function(id){
-          var deferred = $q.defer();
         
+        var deferred = $q.defer();
         var promise;
         var obj = {'instanceName' : 'attractions', 'id' : id};
+        
         promise = Attraction.delete(obj);
         
         promise.success(function(data){
@@ -59,18 +66,19 @@ angular
         return deferred.promise;
       },
       
-       updateAttraction:function(id, address, tagArray){
-          var deferred = $q.defer();
+      //Uppdaterar en turistattraktion
+      updateAttraction:function(id, address, tagArray){
         
+        var deferred = $q.defer();
         var promise;
         var obj = {'instanceName' : 'attractions', 'id' : id};
-         var attr = { "attraction":
-                  {
-                      "address": address,
-                      "tag_ids": tagArray 
-                     
-                  }
-              }
+        var attr = { "attraction":
+                     {
+                       "address": address,
+                       "tag_ids": tagArray
+                     }
+                    }
+        
         promise = Attraction.update(obj, attr);
         
         promise.success(function(data){
@@ -82,25 +90,29 @@ angular
         return deferred.promise;
       },
       
+      //Skapar en turistattraktion
       createAttraction:function(address, tagArray) {
-         var deferred = $q.defer();
-          var promise;
-         var obj = {'instanceName' : 'attractions'};
+        
+        var deferred = $q.defer();
+        var promise;
+        var obj = {'instanceName' : 'attractions'};
         var attr = { "attraction":
-                  {
+                    {
                       "address": address,
                       "tag_ids": tagArray 
-                  }
-              }
-       promise = Attraction.create(obj, attr);
-          promise.success(function(data){
+                    }
+                   }
+        
+        promise = Attraction.create(obj, attr);
+        
+        promise.success(function(data){
           deferred.resolve(data);
         }).catch(function(){
           deferred.reject("Something went wrong, try again");
         });
 
         return deferred.promise;
-    
       }
+    
     };
   }

@@ -8,8 +8,8 @@ function AttractionCreateController($routeParams, attractionService, tagService,
    
   var vm = this;
   
+  //Hämtar taggar för checkbox-listan
   var tagPromise = tagService.get();
-  
   tagPromise
     .then(function(data){
     vm.tagList = data;
@@ -25,21 +25,22 @@ function AttractionCreateController($routeParams, attractionService, tagService,
     return filterFilter(vm.tagList, { selected: true });
   };
   
+  //Skapar en ny turistattraktion
   vm.createAttraction = function() {
-    
-     var log = vm.selectedTags();
-    
+    var log = vm.selectedTags();
     var tagArray = [];
+    
+    //Pushar de valda taggarnas id till tagArray
     angular.forEach(log, function(value, key) {
       this.push(value.id);
-}, tagArray);
-  
-      var createPromise = attractionService.createAttraction(vm.address, tagArray);
-  createPromise.then(function(data){
-   vm.message = "Turistattraktionen har skapats";
-  }).catch(function(error){
-    vm.message = error;
-    console.log(error);
-  })
-  };  
+    }, tagArray);
+    
+    //Anropar AttractionService
+    var createPromise = attractionService.createAttraction(vm.address, tagArray);
+    createPromise.then(function(data){
+      vm.message = "The tourist attraction has been created";
+    }).catch(function(error){
+      vm.message = error;
+    })
+  };
 }

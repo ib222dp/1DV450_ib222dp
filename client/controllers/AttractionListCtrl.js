@@ -8,14 +8,13 @@ function AttractionListController(attractionService) {
  
   var vm = this;
 
+  //Anropar AttractionService för att hämta alla turistattraktioner
   var attractionPromise = attractionService.get();
-
   attractionPromise
-      .then(function(data){
-        vm.attractionList = data;
-      })
-      .catch(function(error) {
-        vm.message = error;
-        console.log(error);
-      });
+    .then(function(data){
+    vm.attractionList = data;
+  })
+    .catch(function(error) {
+    vm.message = error;
+  });
 }

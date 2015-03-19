@@ -8,6 +8,7 @@ function SearchController($http) {
   
   var vm = this;
   
+  //Gör en request till API:et när användaren klickar på Search-knappen
   vm.search = function () {
     var url = "http://jolly-good-highgarden-94-186247.euw1.nitrousbox.com/attractions"
     var config = {
@@ -24,10 +25,8 @@ function SearchController($http) {
     promise.success(function(data, status, headers, config) {
       vm.attractionList = data;
     });
-    
     promise.error(function(data, status, headers, config) {
-     
+      vm.message = "Something went wrong, try again";
     });
-    
-  }; 
+  };
 }

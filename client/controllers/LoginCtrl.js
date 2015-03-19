@@ -5,9 +5,11 @@ angular
 LoginController.$inject = ['$http', '$rootScope', '$location'];
 
 function LoginController($http, $rootScope, $location) {
+  
   var vm = this;                               
   $rootScope.isLoggedIn = false;
   
+  //Gör en login-request när användaren klickar på inloggningsknappen
   vm.login = function() {
     var data = {'email' : vm.email, 'password': vm.password};
     var url = "http://jolly-good-highgarden-94-186247.euw1.nitrousbox.com/login"
@@ -27,7 +29,7 @@ function LoginController($http, $rootScope, $location) {
     });
     
     promise.error(function(data, status, headers, config) {
-      $rootScope.token = data.error;
+      vm.message = data.error;
       $rootScope.isLoggedIn = false;
     });
   };

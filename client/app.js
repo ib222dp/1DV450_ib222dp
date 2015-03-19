@@ -38,10 +38,8 @@ angular
           controller: 'UserDetailController',
           controllerAs: 'user'
         }).
-        when('/tags', {
+       when('/tags', {
           templateUrl: 'partials/tag-list.html',
-          controller: 'TagListController',
-          controllerAs: 'tags'
         }).
         when('/tags/:id', {
           templateUrl: 'partials/tag-detail.html',

@@ -9,7 +9,6 @@ angular
     },
     template: htmlTemplate, 
     link: function(scope, iElement, iAttrs, ctrl) {
-     
       scope.getTags() 
         .success(function() {   }) 
         .error(function() { });  
@@ -17,20 +16,19 @@ angular
     controller: ['$scope', '$http', function($scope, $http) { 
                                                              
       $scope.getTags = function() {
-       
-         var req = {
-            method: 'GET',
-            url: "http://jolly-good-highgarden-94-186247.euw1.nitrousbox.com/tags",
-            headers: {
-                'Accept': 'application/json',
-                'X-ApiKey': "ec5e58d004bcbde0b409bd90593cc28f"
-            }
+        var req = {
+          method: 'GET',
+          url: "http://jolly-good-highgarden-94-186247.euw1.nitrousbox.com/tags",
+          headers: {
+            'Accept': 'application/json',
+            'X-ApiKey': "ec5e58d004bcbde0b409bd90593cc28f"
+          }
         };
         
         return $http(req).success(function(tags) { 
          $scope.dirTagLinks = tags; 
         }).error(function(error) {
-        
+          console.log(error);
         });
       }
     }]

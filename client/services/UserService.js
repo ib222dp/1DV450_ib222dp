@@ -5,9 +5,14 @@ angular
 UserService.$inject = ['ResourceService', 'localStorageService', 'LocalStorageConstants', '$q'];
 
 function UserService(Resource, LocalStorage, LS, $q) {
+  
   var User = Resource('users');
+  
   return {
+    
+    //Hämtar alla användare
     get:function() {
+      
       var items = LocalStorage.get(LS.usersKey);
       var deferred = $q.defer();
       
@@ -23,12 +28,13 @@ function UserService(Resource, LocalStorage, LS, $q) {
       return deferred.promise;
     },
     
+    //Hämtar en enskild användare
     getUser:function(id) {
       
       var deferred = $q.defer();
-      
       var promise;
       var obj = {'instanceName' : 'users', 'id' : id};
+      
       promise = User.getSingle(obj);
       
       promise.success(function(data){
@@ -40,6 +46,7 @@ function UserService(Resource, LocalStorage, LS, $q) {
       });
       
       return deferred.promise;
-    },
+    }
+    
   };
 }

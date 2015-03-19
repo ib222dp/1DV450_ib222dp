@@ -7,8 +7,12 @@ TagService.$inject = ['ResourceService', 'localStorageService', 'LocalStorageCon
 function TagService(Resource, LocalStorage, LS, $q) {
   
   var Tag = Resource('tags');
+  
   return {
+    
+    //Hämtar alla taggar
     get:function() {
+      
       var items = LocalStorage.get(LS.tagsKey);
       var deferred = $q.defer();
       
@@ -24,12 +28,13 @@ function TagService(Resource, LocalStorage, LS, $q) {
       return deferred.promise;
     },
     
+    //Hämtar en enskild tagg
     getTag:function(id) {
       
       var deferred = $q.defer();
-      
       var promise;
       var obj = {'instanceName' : 'tags', 'id' : id};
+      
       promise = Tag.getSingle(obj);
       
       promise.success(function(data){
@@ -41,20 +46,7 @@ function TagService(Resource, LocalStorage, LS, $q) {
       });
       
       return deferred.promise;
-    },
-    
-    saveTag:function(data) {
-      
-      data = { "tag":
-              {
-                "name": "From AngularJS"
-              }
-             }
-      var promise = Tag.save('tags', data).then(function(data) {
-        console.log(data);
-      });
-      return promise;
     }
+    
   };
 }
-  

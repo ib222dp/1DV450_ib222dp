@@ -6,6 +6,9 @@
         <tr>
           <th>Attractions</th>
         </tr>
+        <tr>
+          <td>{{tag.message}}</td>
+        </tr>
         <tr data-ng-repeat="a in tag.attractions">
           <td>{{ a.address | uppercase }}</td>
           <td><a data-ng-href="attractions/{{a.id}}">More info</a></td>
