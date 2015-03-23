@@ -31,7 +31,7 @@ class AttractionsController < ApplicationController
   #Visar en enskild turistattraktion
   def show
     @attraction = Attraction.find(params[:id])
-    respond_with @attraction
+    render json: @attraction, :include => :tags
   end
   
   #Skapar ny turistattraktion

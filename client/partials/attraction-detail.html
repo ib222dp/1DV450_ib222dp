@@ -11,6 +11,7 @@
         </tr>
         <tr data-ng-repeat="t in attraction.tags">
           <td>{{ t.name | uppercase }}</td>
+          <td><a data-ng-href="tags/{{t.id}}">More info</a></td>
         </tr>
       </thead>
      </table>
