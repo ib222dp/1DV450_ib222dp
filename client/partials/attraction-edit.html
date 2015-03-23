@@ -5,7 +5,7 @@
             </div>
               <p> {{ edit.message}} </p>
             <div class="panel-body">
-               <form novalidate name="edit.form" class="simple-form">
+               <form data-ng-if="edit.isLoggedIn" novalidate name="edit.form" class="simple-form">
                  Address: <br />
                  <input type="address" ng-model="edit.address"/><br />
                  <button data-ng-click="edit.updateAttraction()">Update attraction</button>
@@ -14,6 +14,6 @@
          </div>
      </div>
 
- <label ng-repeat="tag in edit.tagList">
+ <label data-ng-if="edit.isLoggedIn" ng-repeat="tag in edit.tagList">
   <input type="checkbox" name="selectedTags[]" value="{{tag.id}}" data-ng-model="tag.selected"/>{{tag.name | uppercase }}
  </label>

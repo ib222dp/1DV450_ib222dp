@@ -12,7 +12,7 @@
      </style>  
       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
    </head>
-   <body>
+   <body data-ng-controller="appCtrl as app">
      <h1 class="jumbotrone">Tourist Attractions</h1>
      <hr />
      <div data-ng-include src="'partials/shared/menu.html'"></div>
@@ -35,6 +35,7 @@
      <script src="services/TagService.js"></script>
      <script src="services/UserService.js"></script>
      <script src="services/ResourceService.js"></script>
+     <script src="services/LoginService.js"></script>
      
      <script src="controllers/AttractionDetailCtrl.js"></script>
      <script src="controllers/AttractionEditCtrl.js"></script>

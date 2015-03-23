@@ -1,5 +1,11 @@
 angular
   .module('clientApp', ['ngRoute', 'LocalStorageModule', 'ngMap', 'tagListDirective'])
+  .controller('appCtrl', ['$rootScope', function ($rootScope) {
+    var vm = this;
+    vm.isLoggedIn = function () {
+      return $rootScope.isLoggedIn;
+    }
+  }])
   .config(['$routeProvider', '$locationProvider',
     function($routeProvider, $locationProvider) {
       $routeProvider.
@@ -56,10 +62,11 @@ angular
           controller: 'SearchController',
           controllerAs: 'searchctrl'
         }).
-       when('/user-attraction-list', {
+       when('/myattractions', {
          templateUrl: 'partials/user-attraction-list.html',
           controller: 'CRUDController',
-          controllerAs: 'crud'
+          controllerAs: 'crud',
+          requireLogin: true
         }).
         otherwise({
           redirectTo: '/'
