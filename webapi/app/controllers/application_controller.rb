@@ -33,8 +33,8 @@ class ApplicationController < ActionController::Base
   #(http://blog.joshsoftware.com/2014/05/08/implementing-rails-apis-like-a-professional)
   def check_apikey
     apikey = request.headers['X-ApiKey']
-    @user = User.where(apikey: apikey).first if apikey
-    unless @user
+    @apiuser = ApiUser.where(apikey: apikey).first if apikey
+    unless @apiuser
       render json: { error: "API-nyckel måste inkluderas" }, status: :forbidden
       return false
     end

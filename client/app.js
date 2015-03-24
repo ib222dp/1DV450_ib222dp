@@ -1,10 +1,17 @@
 angular
   .module('clientApp', ['ngRoute', 'LocalStorageModule', 'ngMap', 'tagListDirective'])
-  .controller('appCtrl', ['$rootScope', function ($rootScope) {
+  .controller('appCtrl', ['$rootScope', '$location', function ($rootScope, $location) {
     var vm = this;
     vm.isLoggedIn = function () {
       return $rootScope.isLoggedIn;
     }
+    
+    vm.logout = function () {
+      $rootScope.token = null;
+      $rootScope.user_id = null;
+      $rootScope.isLoggedIn = false;
+      $location.path('/');
+  }
   }])
   .config(['$routeProvider', '$locationProvider',
     function($routeProvider, $locationProvider) {

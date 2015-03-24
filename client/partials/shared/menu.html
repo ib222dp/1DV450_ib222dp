@@ -8,6 +8,7 @@
       <a class="navbar-brand" data-ng-href="users">Users</a>
       <a class="navbar-brand" data-ng-href="map">Map</a>
       <a class="navbar-brand" data-ng-href="search">Search</a>
+      <button data-ng-if="app.isLoggedIn()" data-ng-click="app.logout()">Log out</button>
     </div>
   </div>
 </nav>

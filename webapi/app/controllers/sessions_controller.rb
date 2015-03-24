@@ -1,6 +1,6 @@
 class SessionsController < ApplicationController
   
-  #Anropas av klient som vill bli autentiserad och få en JSON web token
+  #Anropas av slutanvändare som vill bli autentiserad och få en JSON web token
   def api_auth
     user = User.find_by(email: params[:email])
     if user && user.authenticate(params[:password])
