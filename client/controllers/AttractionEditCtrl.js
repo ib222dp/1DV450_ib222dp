@@ -29,21 +29,25 @@ function AttractionEditController($routeParams, $rootScope, attractionService, t
      
      //Uppdaterar en turistattraktion
      vm.updateAttraction = function() {
-       var log = vm.selectedTags();
-       var tagArray = [];
-       
-       //Pushar de valda taggarnas id till tagArray
-       angular.forEach(log, function(value, key) {
-         this.push(value.id);
-       }, tagArray);
-       
-       //Anropar AttractionService
-       var updatePromise = attractionService.updateAttraction($routeParams.id, vm.address, tagArray);
+       if (!vm.address){
+         vm.message = "Please enter an address";
+       } else { 
+         var log = vm.selectedTags();
+         var tagArray = [];
+         
+         //Pushar de valda taggarnas id till tagArray
+         angular.forEach(log, function(value, key) {
+           this.push(value.id);
+         }, tagArray);
+         
+         //Anropar AttractionService
+         var updatePromise = attractionService.updateAttraction($routeParams.id, vm.address, tagArray);
          updatePromise.then(function(data){
            vm.message = "The tourist attraction has been updated";
          }).catch(function(error){
            vm.message = error;
          })
+       }
      };
    } else {
      vm.message = "You are not logged in.";

@@ -3,13 +3,12 @@
             <div class="panel-heading">
               <h3 class="panel-title">Update Attraction</h3>
             </div>
-              <p> {{ edit.message}} </p>
+              <p> {{ edit.message }} </p>
             <div class="panel-body">
-               <form data-ng-if="edit.isLoggedIn" name="edit.form" class="simple-form">
+               <form data-ng-if="edit.isLoggedIn" name="edit.form" class="simple-form" novalidate>
                  Address: <br />
-                 <input type="text" name="addressfield" ng-model="edit.address"/><br />
-                 <span ng-show="edit.form.addressfield.$error.required">Please enter an address</span>
-                 <button data-ng-click="edit.updateAttraction()">Update attraction</button>
+                 <input type="text" data-ng-model="edit.address" name="address" /><br />
+                 <button type="submit" data-ng-click="edit.updateAttraction()">Update attraction</button>
                </form>
             </div>
          </div>
