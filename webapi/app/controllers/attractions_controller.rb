@@ -75,7 +75,7 @@ class AttractionsController < ApplicationController
   
   #Raderar en turistattraktion
   def destroy
-    attraction = Attraction.find(params[:id])
+    attraction = Attraction.find_by_id(params[:id].to_i)
     
     if attraction
       user = attraction.user
