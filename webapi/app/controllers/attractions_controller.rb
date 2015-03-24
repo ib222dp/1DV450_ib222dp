@@ -1,7 +1,6 @@
 class AttractionsController < ApplicationController
   
   before_action :api_authenticate, only: [:create, :update, :destroy]
-  before_action :check_apikey
   before_action :offset_params, only: [:index]
   
   def index
@@ -50,31 +49,50 @@ class AttractionsController < ApplicationController
   
   #Uppdaterar en turistattraktion
   def update
-      attraction = Attraction.find_by_id(params[:id].to_i)
+    attraction = Attraction.find_by_id(params[:id].to_i)
+    
+    if attraction
       attraction.tags.delete_all
       user = attraction.user
       
       if @token_payload["user_id"].to_i == user.id
         attraction.update(attraction_params)
         if attraction.save
-          respond_with attraction, status: :ok
+          render json: attraction, status: :ok
         else
           error = ErrorMessage.new("Resursen kunde inte uppdateras", "Turistattraktionen kunde inte uppdateras")
           render json: error, status: :bad_request
         end
       else
-        error = ErrorMessage.new(".", ".")
+        error = ErrorMessage.new("Du får inte uppdatera denna resurs.", "Du får inte uppdatera denna turistattraktion.")
         render json: error, status: :forbidden
       end
+    else
+      error = ErrorMessage.new("Resursen kunde inte uppdateras", "Turistattraktionen kunde inte uppdateras")
+      render json: error, status: :bad_request
+    end
   end
   
   #Raderar en turistattraktion
   def destroy
     attraction = Attraction.find(params[:id])
-    if attraction.destroy
-      respond_with status: :no_content
+    
+    if attraction
+      user = attraction.user
+      
+      if @token_payload["user_id"].to_i == user.id
+        if attraction.destroy
+          respond_with status: :no_content
+        else
+          error = ErrorMessage.new("Resursen kunde inte raderas", "Turistattraktionen kunde inte raderas")
+          render json: error, status: :bad_request
+        end
+      else
+        error = ErrorMessage.new("Du får inte radera denna resurs.", "Du får inte radera denna turistattraktion.")
+        render json: error, status: :forbidden
+      end
     else
-      error = ErrorMessage.new("Resursen kunde inte raderas", "Turistattraktionen kunde inte raderas")
+      error = ErrorMessage.new("Resursen kunde inte uppdateras", "Turistattraktionen kunde inte uppdateras")
       render json: error, status: :bad_request
     end
   end

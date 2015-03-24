@@ -5,6 +5,8 @@ class ApplicationController < ActionController::Base
   
   include SessionsHelper
   
+  before_action :check_apikey
+  
   respond_to :json
   
   rescue_from ActionController::UnknownFormat, with: :raise_bad_format
@@ -35,6 +37,7 @@ class ApplicationController < ActionController::Base
     apikey = request.headers['X-ApiKey']
     @apiuser = ApiUser.where(apikey: apikey).first if apikey
     unless @apiuser
+      self.headers['WWW-Authenticate'] = 'Token realm = "Attractions"'
       render json: { error: "API-nyckel måste inkluderas" }, status: :forbidden
       return false
     end
