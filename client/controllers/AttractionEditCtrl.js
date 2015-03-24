@@ -39,11 +39,11 @@ function AttractionEditController($routeParams, $rootScope, attractionService, t
        
        //Anropar AttractionService
        var updatePromise = attractionService.updateAttraction($routeParams.id, vm.address, tagArray);
-       updatePromise.then(function(data){
-         vm.message = "The tourist attraction has been updated";
-       }).catch(function(error){
-         vm.message = error;
-       })
+         updatePromise.then(function(data){
+           vm.message = "The tourist attraction has been updated";
+         }).catch(function(error){
+           vm.message = error;
+         })
      };
    } else {
      vm.message = "You are not logged in.";

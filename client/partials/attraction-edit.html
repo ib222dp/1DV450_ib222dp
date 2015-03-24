@@ -5,9 +5,10 @@
             </div>
               <p> {{ edit.message}} </p>
             <div class="panel-body">
-               <form data-ng-if="edit.isLoggedIn" novalidate name="edit.form" class="simple-form">
+               <form data-ng-if="edit.isLoggedIn" name="edit.form" class="simple-form">
                  Address: <br />
-                 <input type="address" ng-model="edit.address"/><br />
+                 <input type="text" name="addressfield" ng-model="edit.address"/><br />
+                 <span ng-show="edit.form.addressfield.$error.required">Please enter an address</span>
                  <button data-ng-click="edit.updateAttraction()">Update attraction</button>
                </form>
             </div>

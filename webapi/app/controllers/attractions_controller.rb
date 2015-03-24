@@ -50,24 +50,22 @@ class AttractionsController < ApplicationController
   
   #Uppdaterar en turistattraktion
   def update
-    attraction = Attraction.find_by_id(params[:id].to_i)
-    
-    attraction.tags.delete_all
-    
-    user = attraction.user
-    
-    if @token_payload["user_id"].to_i == user.id
-      attraction.update(attraction_params)
-      if attraction.save
-        respond_with attraction, status: :ok
+      attraction = Attraction.find_by_id(params[:id].to_i)
+      attraction.tags.delete_all
+      user = attraction.user
+      
+      if @token_payload["user_id"].to_i == user.id
+        attraction.update(attraction_params)
+        if attraction.save
+          respond_with attraction, status: :ok
+        else
+          error = ErrorMessage.new("Resursen kunde inte uppdateras", "Turistattraktionen kunde inte uppdateras")
+          render json: error, status: :bad_request
+        end
       else
-        error = ErrorMessage.new("Resursen kunde inte uppdateras", "Turistattraktionen kunde inte uppdateras")
-        render json: error, status: :bad_request
+        error = ErrorMessage.new(".", ".")
+        render json: error, status: :forbidden
       end
-    else
-      error = ErrorMessage.new(".", ".")
-      render json: error, status: :forbidden
-    end
   end
   
   #Raderar en turistattraktion

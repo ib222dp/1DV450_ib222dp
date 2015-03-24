@@ -28,6 +28,13 @@ function CRUDController($http, $rootScope, $routeParams, userService, attraction
       var deletePromise = attractionService.deleteAttraction(id);
       deletePromise.then(function(data){
         vm.message = "The tourist attraction has been deleted.";
+        var userPromise = userService.getUser($rootScope.user_id);
+        userPromise.then(function(data){
+          vm.username = data.username;
+          vm.attractions = data.attractions;
+        }).catch(function(error){
+          vm.message = error;
+        })
       }).catch(function(error){
         vm.message = error;
       })

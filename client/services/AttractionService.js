@@ -2,9 +2,9 @@ angular
   .module("clientApp")
   .factory('AttractionService', AttractionService);
 
-  AttractionService.$inject = ['ResourceService', 'localStorageService', 'LocalStorageConstants', '$q', '$rootScope'];
+  AttractionService.$inject = ['ResourceService', '$q', '$rootScope'];
   
-  function AttractionService(Resource, LocalStorage, LS, $q, $rootScope) {
+  function AttractionService(Resource, $q, $rootScope) {
     
     var Attraction = Resource('attractions');
     
@@ -13,18 +13,11 @@ angular
       //Hämtar alla turistattraktioner
       get:function() {
         
-        var items = LocalStorage.get(LS.attractionsKey);
         var deferred = $q.defer();
         
-        if(!items) {
-          Attraction.getCollection().then(function(data){
-            LocalStorage.set(LS.attractionsKey, data);
-            deferred.resolve(data);
-          });
-        }
-        else {
-          deferred.resolve(items);
-        }
+        Attraction.getCollection().then(function(data){
+          deferred.resolve(data);
+        });
         return deferred.promise;
       },
       
@@ -38,8 +31,6 @@ angular
         promise = Attraction.getSingle(obj);
         
         promise.success(function(data){
-          var localStorageKey = LS.attractionsKey +"." +data.id
-          LocalStorage.set(localStorageKey, data);
           deferred.resolve(data);
         }).catch(function(){
           deferred.reject("Something went wrong, try again");
