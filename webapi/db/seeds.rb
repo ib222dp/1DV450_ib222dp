@@ -8,8 +8,8 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
 User.delete_all
-u1 = User.create(:username => "User1", :email => "email@email.com", :password => "123", :password_confirmation => "123", :apikey => "ec5e58d004bcbde0b409bd90593cc28f")
-u2 = User.create(:username => "User2", :email => "epost@epost.com", :password => "123", :password_confirmation => "123", :apikey => "44df969907726c16d8b4445058bfbd86")
+u1 = User.create(:username => "EndUser1", :email => "epost@email.com", :password => "123", :password_confirmation => "123")
+u2 = User.create(:username => "EndUser2", :email => "epost@epost.com", :password => "123", :password_confirmation => "123")
 
 Tag.delete_all
 t1 = Tag.create(:name => "New York")
